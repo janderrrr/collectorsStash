@@ -107,14 +107,45 @@ _* Accepts `GET` requests to `/coins/:id/`
     * If the given coin ID is not found will throw a
       `CoinNotFoundException`_
 
-## 6.7 _Add ComicBook Endpoint_
+## 6.8 _Add ComicBook Endpoint_
 
 * Accepts `POST` requests to `/comicbook/id/volumeNumber/add`
-* Accepts a event ID and a name to be added.
-    * For security concerns, we will validate the provided vendor name does not
-      contain invalid characters: `" ' \`
-    * If the event name contains invalid characters, will throw an
-      `InvalidAttributeValueException`
-    * If the event can not be added to the eventTable, will throw an `UnableToAddToTableException`
-  
+* Accepts a comicbook ID and a ComicBookModel to be added.
+    * If the comicBook can not be added to the comicBookTable, will throw an `UnableToAddToTableException`
 
+## 6.9 _Add Stamps Endpoint_
+
+* Accepts `POST` requests to `/stamps/id/add`
+* Accepts a Stamp ID and a StampModel to be added.
+    * If the Stamp can not be added to the Stamp, will throw an `UnableToAddToTableException`
+
+## 6.10 _Add Coins Endpoint_
+
+* Accepts `POST` requests to `/coins/id/add`
+* Accepts a coins ID and a CoinModel to be added.
+    * If the CoinModel can not be added to the CoinTable, will throw an `UnableToAddToTableException`
+
+## 6.11 _Update ComicBook Endpoint_
+
+* Accepts `PUT` requests to, `/comicbook/:id/volumenumber`
+    * If the given comicbook ID is not found and volumenumber, will throw a
+      `ComicBookNotFoundException`_
+
+## 6.12 _Update ComicBook Endpoint_
+
+* Accepts `PUT` requests to, `/stamps/:id
+    * If the given stamps ID is not found, will throw a
+      `StampsNotFoundException`_
+
+## 6.13 _Update ComicBook Endpoint_
+
+* Accepts `PUT` requests to, `/coins/:id`
+    * If the given coins ID is not found, will throw a
+      `CoinsNotFoundException`_
+
+## Pages
+  
+![HomePage.PNG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FHomePage.PNG)
+![Second Page.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FSecond%20Page.JPG)
+![ThirdPage.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FThirdPage.JPG)
+![FourthPage.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FFourthPage.JPG)
