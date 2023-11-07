@@ -15,10 +15,10 @@ U1. _As a user, I would like to store my collectibles_
 u2. _As a user, I would like to be able to view the books in my collection_
 u3. _As a user, I would like to favorite the books I like most_
 U4. _As a user, I would like to view to store the price I paid for such book_
-U5. _As a user, I would like to select a series I am collection and see the missing books_
+U5. _As a user, I would like to select a series I am collecting and see the missing books_
 U6. _As a user, I would like to update my collection with new books or collectibles I have purchased_
 U7. _As a user, I would like to update my collection, to get rid of books I might have sold off and no longer own_
-U8. _As a user, I would like add a book to a new series I have started collection_
+U8. _As a user, I would like add a book to a new series I have started collecting_
 U9. _As a user, I would like create an account_
 U10. _As a user, I would like to login to my account_
 U12. _As a user, I would like to see collection based of my login_
