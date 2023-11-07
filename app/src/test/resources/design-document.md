@@ -11,17 +11,16 @@ Many individuals have a passion for collecting various and unique items, be it c
 3. What is the main goal vs the stretch goals, but clear on what the end goal looks like realistically
 
 ## Use Cases
-U1. _As a user, I would like to store my collectibles_
-u2. _As a user, I would like to be able to view the books in my collection_
-u3. _As a user, I would like to favorite the books I like most_
-U4. _As a user, I would like to view to store the price I paid for such book_
-U5. _As a user, I would like to select a series I am collecting and see the missing books_
-U6. _As a user, I would like to update my collection with new books or collectibles I have purchased_
-U7. _As a user, I would like to update my collection, to get rid of books I might have sold off and no longer own_
-U8. _As a user, I would like add a book to a new series I have started collecting_
-U9. _As a user, I would like create an account_
-U10. _As a user, I would like to login to my account_
-U12. _As a user, I would like to see collection based of my login_
+u1. _As a user, I would like to be able to view the books in my collection_
+u2. _As a user, I would like to favorite the books I like most_
+U3. _As a user, I would like to view to store the price I paid for such book_
+U4. _As a user, I would like to select a series I am collecting and see the missing books_
+U5. _As a user, I would like to update my collection with new books or collectibles I have purchased_
+U6. _As a user, I would like to update my collection, to get rid of books I might have sold off and no longer own_
+U7. _As a user, I would like add a book to a new series I have started collecting_
+U8. _As a user, I would like create an account_
+U9 _As a user, I would like to login to my account_
+U10. _As a user, I would like to see collection based of my login_
 
 Stretch goals:
 - Search Option
@@ -52,18 +51,6 @@ Int price
 Boolean isFavorite
 String publisher
 ```
-// Can these Coins and Stamp use same data table?
-// If not use different tables
-```
-// CoinAndStampModel
-
-String id
-String year
-String Condition
-Int price
-String Country
-Boolean isFavorite
-```
 
 ## 6.2 _Get All Comic Books Endpoint_
 
@@ -72,80 +59,32 @@ _* Accepts `GET` requests to `/comicbooks/`
     * If no ComicBookTable is found
       `ComicBookNotFoundException`_
 
-## 6.3 _Get All Stamps Endpoint_
 
-_* Accepts `GET` requests to `/stamps/`
-* Scans stamps table and returns all CoinAndStampModel.
-    * If no StampTable is found
-      `StampsNotFoundException`_
-
-## 6.4 _Get All Coins Endpoint_
-
-_* Accepts `GET` requests to `/coins/`
-* Scans coins table and returns all CoinAndStampModel.
-    * If no CoinsTable is found
-      `CoinsNotFoundException`_
-
-## 6.5 _Get One ComicBook Endpoint_
+## 6.3 _Get One ComicBook Endpoint_
 
 _* Accepts `GET` requests to `/comicbooks/:id/volumeNumber`
 * Accepts a comicbook ID and volumeNumber returns the corresponding Comic Book Title.
     * If the given comicBook ID is not found or volumeNumber is not found, will throw a
       `ComicBookNotFoundException`_
 
-## 6.6 _Get One Stamp Endpoint_
-
-_* Accepts `GET` requests to `/stamps/:id`
-* Accepts a stamp ID and returns the corresponding Stamp Model.
-    * If the given stamp ID is not found will throw a
-      `StampNotFoundException`_
-
-## 6.7 _Get One Coin Endpoint_
-
-_* Accepts `GET` requests to `/coins/:id/`
-* Accepts a coins ID and returns the corresponding Coin Model.
-    * If the given coin ID is not found will throw a
-      `CoinNotFoundException`_
-
-## 6.8 _Add ComicBook Endpoint_
+## 6.4 _Add ComicBook Endpoint_
 
 * Accepts `POST` requests to `/comicbook/id/volumeNumber/add`
 * Accepts a comicbook ID and a ComicBookModel to be added.
     * If the comicBook can not be added to the comicBookTable, will throw an `UnableToAddToTableException`
 
-## 6.9 _Add Stamps Endpoint_
 
-* Accepts `POST` requests to `/stamps/id/add`
-* Accepts a Stamp ID and a StampModel to be added.
-    * If the Stamp can not be added to the Stamp, will throw an `UnableToAddToTableException`
-
-## 6.10 _Add Coins Endpoint_
-
-* Accepts `POST` requests to `/coins/id/add`
-* Accepts a coins ID and a CoinModel to be added.
-    * If the CoinModel can not be added to the CoinTable, will throw an `UnableToAddToTableException`
-
-## 6.11 _Update ComicBook Endpoint_
+## 6.5 _Update ComicBook Endpoint_
 
 * Accepts `PUT` requests to, `/comicbook/:id/volumenumber`
     * If the given comicbook ID is not found and volumenumber, will throw a
       `ComicBookNotFoundException`_
 
-## 6.12 _Update ComicBook Endpoint_
-
-* Accepts `PUT` requests to, `/stamps/:id
-    * If the given stamps ID is not found, will throw a
-      `StampsNotFoundException`_
-
-## 6.13 _Update ComicBook Endpoint_
-
-* Accepts `PUT` requests to, `/coins/:id`
-    * If the given coins ID is not found, will throw a
-      `CoinsNotFoundException`_
 
 ## Pages
   
-![HomePage.PNG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FHomePage.PNG)
+![](../../../../resources/images/designImages/homepagenew.png)
 ![Second Page.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FSecond%20Page.JPG)
-![ThirdPage.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FThirdPage.JPG)
-![FourthPage.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FFourthPage.JPG)
+![](../../../../resources/images/designImages/thirdpagenew.png)
+![](../../../../resources/images/designImages/fourthpagenew.png)
+
