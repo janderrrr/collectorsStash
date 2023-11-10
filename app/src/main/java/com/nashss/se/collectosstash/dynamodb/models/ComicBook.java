@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "ComicBooks")
 public class ComicBook {
-    private String titleId;
+    private String seriesTitle;
     private String volumeNumber;
     private String issueNumber;
     private String date;
@@ -20,8 +20,8 @@ public class ComicBook {
     private String publisher;
 
 
-    public ComicBook(String titleId, String volumeNumber, String issueNumber, String date, int price, boolean isFavorite, String publisher) {
-        this.titleId = titleId;
+    public ComicBook(String seriesTitle, String volumeNumber, String issueNumber, String date, int price, boolean isFavorite, String publisher) {
+        this.seriesTitle = seriesTitle;
         this.volumeNumber = volumeNumber;
         this.issueNumber = issueNumber;
         this.date = date;
@@ -34,9 +34,9 @@ public class ComicBook {
      *
      * @return id, the partition key of the comicBook in the ComicBooks table
      */
-    @DynamoDBHashKey(attributeName = "titleId")
-    public String getId() {
-        return titleId;
+    @DynamoDBHashKey(attributeName = "seriesTitle")
+    public String getSeriesTitle() {
+        return seriesTitle;
     }
 
     /**
@@ -78,8 +78,8 @@ public class ComicBook {
     }
 
 
-    public void setId(String id) {
-        this.titleId = id;
+    public void setSeriesTitle(String seriesTitle) {
+        this.seriesTitle = seriesTitle;
     }
 
     public void setVolumeNumber(String volumeNumber) {

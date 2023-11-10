@@ -86,19 +86,18 @@ seriesTitle // partition key, string Batman
 volumeNumber // sortkey, string 
 issueNumber // string
 date // string
-price // int
+price // int, might use as a GSI, to find issues that I paid for a certain price. (might be a stretch goal)
 isFavorite // boolean, sort key for GSI to find if favorite
 publisher // string
 ```
 
 
-comic book store locations
+Series - (pre-populated comic book table)
 
 ```
-name // partition key, string
-state // string
-city // string
-isFair // boolean, checking to see if they prices are fair or not/ sometimes i forget which comic stores i have been too
+seriesTitle// partition key, string
+issues // string
+isPopular // boolean
 
 ```
 
