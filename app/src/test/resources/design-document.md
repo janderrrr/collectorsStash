@@ -79,6 +79,13 @@ _* Accepts `GET` requests to `/comicbooks/:titleId/volumeNumber`
     * If the given comicbook ID is not found and volumenumber, will throw a
       `ComicBookNotFoundException`_
 
+## 6.6 _Get All Series Endpoint_
+
+_* Accepts `GET` requests to `/comicbooks/series`
+* Scans series table and returns all Series of pre-populated comic book model.
+    * If no ComicBookTable is found
+      `ComicBookNotFoundException`_
+
 ## Tables
 Comic Books
 ```
@@ -103,8 +110,9 @@ isPopular // boolean
 
 ## Pages
   
-![](../../../../resources/images/designImages/homepagenew.png)
-![Second Page.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FSecond%20Page.JPG)
-![](../../../../resources/images/designImages/thirdpagenew.png)
-![](../../../../resources/images/designImages/fourthpagenew.png)
+![PageOne.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FPageOne.JPG)
+![PageTwo.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FPageTwo.JPG)
+![PageThree.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FPageThree.JPG)
+![PageFour.JPG](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2FPageFour.JPG)
+![fourthpagenew.png](..%2F..%2F..%2F..%2Fresources%2Fimages%2FdesignImages%2Ffourthpagenew.png)
 
