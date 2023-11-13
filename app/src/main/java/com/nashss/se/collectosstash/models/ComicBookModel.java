@@ -3,7 +3,7 @@ package com.nashss.se.collectosstash.models;
 import java.util.Objects;
 
 public class ComicBookModel {
-    private final String id;
+    private final String seriesTitle;
     private final String volumeNumber;
     private final String issueNumber;
     private final String date;
@@ -12,8 +12,8 @@ public class ComicBookModel {
     private final String publisher;
 
 
-    public ComicBookModel(String id, String volumeNumber, String issueNumber, String date, int price, Boolean isFavorite, String publisher) {
-        this.id = id;
+    public ComicBookModel(String seriesTitle, String volumeNumber, String issueNumber, String date, int price, Boolean isFavorite, String publisher) {
+        this.seriesTitle = seriesTitle;
         this.volumeNumber = volumeNumber;
         this.issueNumber = issueNumber;
         this.date = date;
@@ -22,8 +22,8 @@ public class ComicBookModel {
         this.publisher = publisher;
     }
 
-    public String getId() {
-        return id;
+    public String getSeriesTitle() {
+        return seriesTitle;
     }
 
     public String getVolumeNumber() {
@@ -55,12 +55,12 @@ public class ComicBookModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComicBookModel that = (ComicBookModel) o;
-        return price == that.price && Objects.equals(id, that.id) && Objects.equals(volumeNumber, that.volumeNumber) && Objects.equals(issueNumber, that.issueNumber) && Objects.equals(date, that.date) && Objects.equals(isFavorite, that.isFavorite) && Objects.equals(publisher, that.publisher);
+        return price == that.price && Objects.equals(seriesTitle, that.seriesTitle) && Objects.equals(volumeNumber, that.volumeNumber) && Objects.equals(issueNumber, that.issueNumber) && Objects.equals(date, that.date) && Objects.equals(isFavorite, that.isFavorite) && Objects.equals(publisher, that.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, volumeNumber, issueNumber, date, price, isFavorite, publisher);
+        return Objects.hash(seriesTitle, volumeNumber, issueNumber, date, price, isFavorite, publisher);
     }
     //CHECKSTYLE:OFF:BUILDER
     public static Builder builder(){
@@ -68,7 +68,7 @@ public class ComicBookModel {
     }
 
     public static class Builder {
-        private String id;
+        private String seriesTitle;
         private String volumeNumber;
         private String issueNumber;
         private String date;
@@ -76,8 +76,8 @@ public class ComicBookModel {
         private Boolean isFavorite;
         private String publisher;
 
-        public Builder withId(String id) {
-            this.id = id;
+        public Builder withSeriesTitle(String seriesTitle) {
+            this.seriesTitle = seriesTitle;
             return this;
         }
 
