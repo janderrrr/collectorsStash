@@ -12,14 +12,22 @@ Many individuals have a passion for collecting various and unique items, be it c
 
 ## Use Cases
 u1. _As a user, I would like to be able to view the books in my collection_
+
 u2. _As a user, I would like to favorite the books I like most_
+
 U3. _As a user, I would like to view to store the price I paid for such book_
-U5. _As a user, I would like to update my collection with new books or collectibles I have purchased_
-U6. _As a user, I would like to update my collection, to get rid of books I might have sold off and no longer own_
-U7. _As a user, I would like add a book to a new series I have started collecting_
-U8. _As a user, I would like create an account_
-U9 _As a user, I would like to login to my account_
-U10. _As a user, I would like to see collection based of my login_
+
+U4. _As a user, I would like to update my collection with new books or collectibles I have purchased_
+
+U5. _As a user, I would like to update my collection, to get rid of books I might have sold off and no longer own_
+
+U6. _As a user, I would like add a book to a new series I have started collecting_
+
+U7. _As a user, I would like create an account_
+
+U8 _As a user, I would like to log in to my account_
+
+U9. _As a user, I would like to see collection based of my login_
 
 Stretch goals:
 - Search Option
@@ -42,7 +50,7 @@ _that will handle the creation, update, and retrieval of events and vendors to s
 ```
 // ComicBookModel
 
-String titleId
+String seriesTitle
 String volumeNumber
 String issueNumber
 String date
@@ -50,6 +58,13 @@ Int price
 Boolean isFavorite
 String publisher
 ```
+```
+// SeriesModel
+String seriesTitle
+
+
+```
+
 
 ## 6.2 _Get All Comic Books Endpoint_
 
@@ -89,7 +104,7 @@ _* Accepts `GET` requests to `/comicbooks/series`
 ## Tables
 Comic Books
 ```
-seriesTitle // partition key, string Batman
+ seriesId // partition key, string 
 volumeNumber // sortkey, string 
 issueNumber // string
 date // string

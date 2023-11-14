@@ -55,7 +55,9 @@ public class ComicBookModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComicBookModel that = (ComicBookModel) o;
-        return price == that.price && Objects.equals(seriesTitle, that.seriesTitle) && Objects.equals(volumeNumber, that.volumeNumber) && Objects.equals(issueNumber, that.issueNumber) && Objects.equals(date, that.date) && Objects.equals(isFavorite, that.isFavorite) && Objects.equals(publisher, that.publisher);
+        return price == that.price && Objects.equals(seriesTitle, that.seriesTitle) && Objects.equals(volumeNumber, that.volumeNumber) &&
+                Objects.equals(issueNumber, that.issueNumber) && Objects.equals(date, that.date) && Objects.equals(isFavorite, that.isFavorite) &&
+                Objects.equals(publisher, that.publisher);
     }
 
     @Override
@@ -110,6 +112,9 @@ public class ComicBookModel {
             this.publisher = publisher;
             return this;
         }
-        
+
+        public ComicBookModel build(){
+            return new ComicBookModel(seriesTitle, volumeNumber, issueNumber, date, price, isFavorite, publisher);
+        }
     }
 }
