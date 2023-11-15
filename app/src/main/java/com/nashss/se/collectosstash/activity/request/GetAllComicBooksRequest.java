@@ -25,6 +25,7 @@ public class GetAllComicBooksRequest {
                 '}';
     }
 
+    //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
         return new Builder();
     }
@@ -37,20 +38,20 @@ public class GetAllComicBooksRequest {
         private String volumeNumber;
 
         /**
-         * @param buildSeriesTitle  String
+         * @param seriesTitle  String
          * @return seriesTitle
          */
 
-        public Builder withSeriesTitle(String buildSeriesTitle){
-            this.seriesTitle = buildSeriesTitle;
+        public Builder withSeriesTitle(String seriesTitle){
+            this.seriesTitle = seriesTitle;
             return this;
         }
         /**
-         * @param buildVolumeNumber String
+         * @param volumeNumber String
          * @return volumeNumber
          */
-        public Builder withVolumeNumber(String buildVolumeNumber) {
-            this.volumeNumber = buildVolumeNumber;
+        public Builder withVolumeNumber(String volumeNumber) {
+            this.volumeNumber = volumeNumber;
             return this;
         }
 

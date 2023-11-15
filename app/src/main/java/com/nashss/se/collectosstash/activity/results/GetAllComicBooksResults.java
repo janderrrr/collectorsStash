@@ -46,23 +46,25 @@ public class GetAllComicBooksResults {
         return new Builder();
     }
 
-    public static class Builder(){
+
+    //CHECKSTYLE:OFF:Builder
+    public static class Builder {
         private List<ComicBookModel> comicList;
         private String seriesTitle;
         private String volumeNumber;
 
-        public Builder withComicList(List<ComicBookModel> buildComicList){
-            this.comicList = buildComicList;
+        public Builder withComicList(List<ComicBookModel> comicList){
+            this.comicList = comicList;
             return this;
         }
 
-        public Builder withSeriesTitle(String buildSeriesTitle){
-            this.seriesTitle = buildSeriesTitle;
+        public Builder withSeriesTitle(String seriesTitle){
+            this.seriesTitle = seriesTitle;
             return this;
         }
 
-        public Builder withVolumeNumber(String buildVolumeNumber){
-            this.volumeNumber = buildVolumeNumber;
+        public Builder withVolumeNumber(String volumeNumber){
+            this.volumeNumber = volumeNumber;
             return this;
         }
 
