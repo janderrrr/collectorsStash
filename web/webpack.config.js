@@ -23,6 +23,7 @@ module.exports = {
     usedExports: true
   },
   entry: {
+    series: path.resolve(__dirname, 'src', 'pages', 'series.js'),
     viewAllComicBooks: path.resolve(__dirname, 'src', 'pages', 'viewAllComicBooks.js'),
  },
   output: {

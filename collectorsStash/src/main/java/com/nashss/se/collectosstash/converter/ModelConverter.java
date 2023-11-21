@@ -1,7 +1,9 @@
 package com.nashss.se.collectosstash.converter;
 
 import com.nashss.se.collectosstash.dynamodb.models.ComicBook;
+import com.nashss.se.collectosstash.dynamodb.models.Series;
 import com.nashss.se.collectosstash.models.ComicBookModel;
+import com.nashss.se.collectosstash.models.SeriesModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +30,20 @@ public class ModelConverter {
                 .withPrice(comicBook.getPrice())
                 .withIsFavorite(comicBook.isFavorite())
                 .withPublisher(comicBook.getPublisher())
+                .build();
+    }
+
+    public List<SeriesModel> toSeriesModelList(List<Series> series) {
+        return series.stream()
+                .map(this::toSeriesModel)
+                .collect(Collectors.toList());
+    }
+
+    public SeriesModel toSeriesModel(Series series) {
+        return SeriesModel.builder()
+                .withCustomerId(series.getCustomerId())
+                .withTitle(series.getTitle())
+                .withVolumeNumber(series.getVolumeNumber())
                 .build();
     }
 }

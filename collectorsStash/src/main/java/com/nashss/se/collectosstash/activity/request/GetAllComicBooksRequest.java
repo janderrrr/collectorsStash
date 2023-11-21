@@ -41,7 +41,6 @@ public class GetAllComicBooksRequest {
          * @param seriesTitle  String
          * @return seriesTitle
          */
-
         public Builder withSeriesTitle(String seriesTitle){
             this.seriesTitle = seriesTitle;
             return this;

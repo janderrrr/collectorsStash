@@ -6,7 +6,7 @@ import java.util.Objects;
 
 
 /**
- * Represents a Vendor in the DynamoDB table.
+ * Represents a ComicBook in the DynamoDB table.
  */
 
 @DynamoDBTable(tableName = "ComicBooks")
