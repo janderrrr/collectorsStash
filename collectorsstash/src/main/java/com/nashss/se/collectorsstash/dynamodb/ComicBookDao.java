@@ -18,7 +18,6 @@ import java.util.Map;
 @Singleton
 public class ComicBookDao {
 
-    private static final int PAGINATION_LIMIT = 5;
     private final MetricsPublisher metricsPublisher;
     private final DynamoDBMapper mapper;
 
@@ -36,7 +35,6 @@ public class ComicBookDao {
         }
 
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withLimit(PAGINATION_LIMIT)
                 .withExclusiveStartKey(valueMap);
 
 

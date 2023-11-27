@@ -9,7 +9,7 @@ import java.util.Objects;
  * Represents a ComicBook in the DynamoDB table.
  */
 
-@DynamoDBTable(tableName = "ComicBooks")
+@DynamoDBTable(tableName = "comicbooks")
 public class ComicBook {
     private String seriesTitle;
     private String volumeNumber;
