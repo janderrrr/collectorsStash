@@ -231,6 +231,13 @@ Resources:
               - Effect: Allow
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/Vendors"
+        - PolicyName: 'AccessComicBooksTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/comicbooks"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -239,8 +246,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: collectorsStash
-      Handler: com.nashss.se.collectorsStash.lambda.GetAllComicBooksLambda::handleRequest
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.GetAllComicBooksLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -260,8 +267,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: collectorsStash
-      Handler: com.nashss.se.collectorsStash.lambda.GetAllComicBooksLambda::handleRequest
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsStash.lambda.GetSeriesLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
