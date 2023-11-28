@@ -7,14 +7,14 @@ import com.nashss.se.collectorsstash.dynamodb.SeriesDao;
 import com.nashss.se.collectorsstash.dynamodb.models.Series;
 import com.nashss.se.collectorsstash.models.SeriesModel;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class GetSeriesActivity {
 
-    private final Logger log = (Logger) LogManager.getLogger();
+    private final Logger log = LogManager.getLogger();
     private final SeriesDao seriesDao;
 
     @Inject
@@ -23,7 +23,7 @@ public class GetSeriesActivity {
     }
 
     public GetSeriesResults handleRequest(final GetSeriesRequest getSeriesRequest) {
-        log.info("Received GetSeriesRequest {}");
+        log.info("Received GetSeriesRequest {}", getSeriesRequest);
 
         String requestedCustomerId = getSeriesRequest.getCustomerId();
         List<Series> series = seriesDao.getSeries(requestedCustomerId);

@@ -1,6 +1,7 @@
 package com.nashss.se.collectorsstash.dependency;
 
 import com.nashss.se.collectorsstash.activity.GetAllComicBooksActivity;
+import com.nashss.se.collectorsstash.activity.GetSeriesActivity;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -17,4 +18,6 @@ public interface ServiceComponent {
      * @return GetAllComicBooksActivity
      */
     GetAllComicBooksActivity provideGetAllComicBooksActivity();
+
+    GetSeriesActivity provideGetSeriesActivity();
 }

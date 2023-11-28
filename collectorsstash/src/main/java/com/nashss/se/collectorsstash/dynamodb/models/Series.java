@@ -13,8 +13,7 @@ import java.util.Objects;
 @DynamoDBTable(tableName = "series")
 public class Series {
     private String customerId;
-//    private String seriesId;
-    //talk to jean again
+    private String seriesId;
     private String title;
     private String volumeNumber;
 

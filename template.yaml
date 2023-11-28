@@ -268,7 +268,7 @@ Resources:
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: collectorsstash
-      Handler: com.nashss.se.collectorsStash.lambda.GetSeriesLambda::handleRequest
+      Handler: com.nashss.se.collectorsstash.lambda.GetSeriesLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
