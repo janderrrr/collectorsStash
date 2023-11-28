@@ -2,6 +2,7 @@ package com.nashss.se.collectorsstash.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.Objects;
@@ -29,10 +30,10 @@ public class Series {
      *
      * @return seriesId, the range key of the series in the Series table
      */
-//    @DynamoDBRangeKey(attributeName = "seriesId")
-//    public String getSeriesId() {
-//        return seriesId;
-//    }
+    @DynamoDBRangeKey(attributeName = "seriesId")
+    public String getSeriesId() {
+        return seriesId;
+    }
 
     /**
      *
@@ -57,9 +58,9 @@ public class Series {
         this.customerId = customerId;
     }
 
-//    public void setSeriesId(String seriesId) {
-//        this.seriesId = seriesId;
-//    }
+    public void setSeriesId(String seriesId) {
+        this.seriesId = seriesId;
+    }
 
     public void setTitle(String title) {
         this.title = title;

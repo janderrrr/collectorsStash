@@ -1,5 +1,6 @@
 package com.nashss.se.collectorsstash.dependency;
 
+import com.nashss.se.collectorsstash.activity.CreateSeriesActivity;
 import com.nashss.se.collectorsstash.activity.GetAllComicBooksActivity;
 import com.nashss.se.collectorsstash.activity.GetSeriesActivity;
 import dagger.Component;
@@ -20,4 +21,6 @@ public interface ServiceComponent {
     GetAllComicBooksActivity provideGetAllComicBooksActivity();
 
     GetSeriesActivity provideGetSeriesActivity();
+
+    CreateSeriesActivity provideCreateSeriesActivity();
 }

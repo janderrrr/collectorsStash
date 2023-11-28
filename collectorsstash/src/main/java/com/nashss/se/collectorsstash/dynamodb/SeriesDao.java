@@ -6,6 +6,7 @@ import com.nashss.se.collectorsstash.dynamodb.models.Series;
 import com.nashss.se.collectorsstash.exceptions.SeriesNotFoundException;
 import com.nashss.se.collectorsstash.metrics.MetricsConstants;
 import com.nashss.se.collectorsstash.metrics.MetricsPublisher;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -49,5 +50,9 @@ public class SeriesDao {
     public Series saveSeries(Series series) {
         this.mapper.save(series);
         return series;
+    }
+    //Creating a SeriesId random UUID, to be unique when creating each Series
+    public String generateSeriesId(){
+        return RandomStringUtils.randomAlphabetic(6);
     }
 }
