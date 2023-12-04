@@ -22,17 +22,6 @@
     padding: 4px 20px;
 }
 
-#showEventsButton {
-    display: flex;
-    justify-content: center;
-    padding: 15px 0;
-}
-
-#showVendors {
-    display: flex;
-    justify-content: center;
-    padding: 15px 0;
-}
 
 .button {
     border: none;

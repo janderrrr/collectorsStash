@@ -28,6 +28,7 @@ public class CreateSeriesActivity {
         series.setSeriesId(seriesDao.generateSeriesId());
         series.setTitle(createSeriesRequest.getTitle());
         series.setVolumeNumber(createSeriesRequest.getVolumeNumber());
+        //add checks
 
         seriesDao.saveSeries(series);
 

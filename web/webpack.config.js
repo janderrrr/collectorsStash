@@ -23,7 +23,9 @@ module.exports = {
     usedExports: true
   },
   entry: {
-    series: path.resolve(__dirname, 'src', 'pages', 'series.js'),
+    index: path.resolve(__dirname, 'src', 'pages', 'index.js'),
+    viewSeries: path.resolve(__dirname, 'src', 'pages', 'viewSeries.js'),
+    createSeries: path.resolve(__dirname, 'src', 'pages', 'createSeries.js'),
     viewAllComicBooks: path.resolve(__dirname, 'src', 'pages', 'viewAllComicBooks.js'),
  },
   output: {

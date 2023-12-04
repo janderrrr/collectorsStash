@@ -75,11 +75,11 @@ public class Series {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Series series = (Series) o;
-        return Objects.equals(customerId, series.customerId) && Objects.equals(title, series.title) && Objects.equals(volumeNumber, series.volumeNumber);
+        return Objects.equals(customerId, series.customerId) && Objects.equals(seriesId, series.seriesId) && Objects.equals(title, series.title) && Objects.equals(volumeNumber, series.volumeNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, title, volumeNumber);
+        return Objects.hash(customerId, seriesId, title, volumeNumber);
     }
 }

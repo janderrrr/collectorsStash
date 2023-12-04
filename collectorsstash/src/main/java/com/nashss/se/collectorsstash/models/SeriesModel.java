@@ -4,17 +4,23 @@ import java.util.Objects;
 
 public class SeriesModel {
     private final String customerId;
+    private final String seriesId;
     private final String title;
     private final String volumeNumber;
 
-    public SeriesModel(String customerId, String title, String volumeNumber) {
+    public SeriesModel(String customerId, String seriesId, String title, String volumeNumber) {
         this.customerId = customerId;
+        this.seriesId = seriesId;
         this.title = title;
         this.volumeNumber = volumeNumber;
     }
 
     public String getCustomerId() {
         return customerId;
+    }
+
+    public String getSeriesId() {
+        return seriesId;
     }
 
     public String getTitle() {
@@ -30,12 +36,12 @@ public class SeriesModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SeriesModel that = (SeriesModel) o;
-        return Objects.equals(customerId, that.customerId) && Objects.equals(title, that.title) && Objects.equals(volumeNumber, that.volumeNumber);
+        return Objects.equals(customerId, that.customerId) && Objects.equals(seriesId, that.seriesId) && Objects.equals(title, that.title) && Objects.equals(volumeNumber, that.volumeNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, title, volumeNumber);
+        return Objects.hash(customerId, seriesId, title, volumeNumber);
     }
 
     //CHECKSTYLE:OFF:BUILDER
@@ -45,11 +51,17 @@ public class SeriesModel {
 
     public static class Builder {
         private String customerId;
+        private String seriesId;
         private String title;
         private String volumeNumber;
 
         public Builder withCustomerId(String customerId) {
             this.customerId = customerId;
+            return this;
+        }
+
+        public Builder withSeriesId(String seriesId) {
+            this.seriesId = seriesId;
             return this;
         }
 
@@ -64,7 +76,7 @@ public class SeriesModel {
         }
 
         public SeriesModel build() {
-            return new SeriesModel(customerId, title, volumeNumber);
+            return new SeriesModel(customerId, seriesId, title, volumeNumber);
         }
     }
 }

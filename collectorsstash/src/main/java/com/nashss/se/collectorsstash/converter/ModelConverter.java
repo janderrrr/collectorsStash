@@ -42,6 +42,7 @@ public class ModelConverter {
     public SeriesModel toSeriesModel(Series series) {
         return SeriesModel.builder()
                 .withCustomerId(series.getCustomerId())
+                .withSeriesId(series.getSeriesId())
                 .withTitle(series.getTitle())
                 .withVolumeNumber(series.getVolumeNumber())
                 .build();
