@@ -7,33 +7,19 @@ import java.util.List;
 
 public class GetAllComicBooksResults {
     private final List<ComicBookModel> comicList;
-    private String seriesTitle;
-    private String volumeNumber;
 
-    private GetAllComicBooksResults(List<ComicBookModel> comicList, String seriesTitle, String volumeNumber){
+    private GetAllComicBooksResults(List<ComicBookModel> comicList){
         this.comicList = comicList;
-        this.seriesTitle = seriesTitle;
-        this.volumeNumber = volumeNumber;
     }
 
     public List<ComicBookModel> getComicList() {
-        return new ArrayList<>();
-    }
-
-    public String getSeriesTitle(){
-        return seriesTitle;
-    }
-
-    public String getVolumeNumber(){
-        return volumeNumber;
+        return comicList;
     }
 
     @Override
     public String toString() {
         return "GetAllComicBooksResults{" +
                 "comicList=" + comicList +
-                ", seriesTitle='" + seriesTitle + '\'' +
-                ", volumeNumber='" + volumeNumber + '\'' +
                 '}';
     }
 
@@ -50,26 +36,15 @@ public class GetAllComicBooksResults {
     //CHECKSTYLE:OFF:Builder
     public static class Builder {
         private List<ComicBookModel> comicList;
-        private String seriesTitle;
-        private String volumeNumber;
 
         public Builder withComicList(List<ComicBookModel> comicList){
             this.comicList = comicList;
             return this;
         }
 
-        public Builder withSeriesTitle(String seriesTitle){
-            this.seriesTitle = seriesTitle;
-            return this;
-        }
-
-        public Builder withVolumeNumber(String volumeNumber){
-            this.volumeNumber = volumeNumber;
-            return this;
-        }
 
         public GetAllComicBooksResults build() {
-            return new GetAllComicBooksResults(comicList, seriesTitle, volumeNumber);
+            return new GetAllComicBooksResults(comicList);
         }
 
     }

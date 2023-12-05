@@ -17,6 +17,7 @@ import java.util.Map;
 @Singleton
 public class ComicBookDao {
 
+    private static final int PAGINATION_LIMIT = 5;
     private final MetricsPublisher metricsPublisher;
     private final DynamoDBMapper mapper;
 
@@ -26,31 +27,24 @@ public class ComicBookDao {
         this.metricsPublisher = metricsPublisher;
     }
 
-    public List<ComicBook> getAllComicBooks(String seriesTitle, String volumeNumber){
+    public List<ComicBook> getAllComicBooks(String seriesId){
         ComicBook comicBook = new ComicBook();
-//        comicBook.setSeriesTitle(seriesTitle);
-//        comicBook.setVolumeNumber(volumeNumber);
-//
-//        Map<String, AttributeValue> valueMap = new HashMap<>();
-//        if(seriesTitle != null && volumeNumber != null) {
-//            valueMap.put("seriesTitle", new AttributeValue().withS(seriesTitle));
-//            valueMap.put("volumeNumber", new AttributeValue().withS(volumeNumber));
-//        }
-//
-//        DynamoDBQueryExpression<ComicBook> queryExpression = new DynamoDBQueryExpression<ComicBook>()
-//                .withHashKeyValues(comicBook);
+        comicBook.setSeriesId(seriesId);
 
-//
-//        QueryResultPage<ComicBook>
-//
-//        if(scanList == null) {
-//            metricsPublisher.addCount(
-//                    MetricsConstants.GETALLCOMICBOOKS_FAIL_COUNT, 1);
-//            throw new ComicBookNotFoundException("Comic book not found");
-//        }
-//        metricsPublisher.addCount(MetricsConstants.GETALLCOMICBOOKS_SUCCESS_COUNT, 0);
-//        return scanList.getResults();
-        return null;
+        DynamoDBQueryExpression<ComicBook> queryExpression = new DynamoDBQueryExpression<ComicBook>()
+                .withHashKeyValues(comicBook)
+                .withLimit(PAGINATION_LIMIT);
+
+        QueryResultPage<ComicBook> comicList = mapper.queryPage(ComicBook.class, queryExpression);
+
+        if(comicList == null) {
+            metricsPublisher.addCount(
+                    MetricsConstants.GETALLCOMICBOOKS_FAIL_COUNT, 1);
+            throw new ComicBookNotFoundException("Comic book not found");
+        }
+        metricsPublisher.addCount(MetricsConstants.GETALLCOMICBOOKS_SUCCESS_COUNT, 0);
+        return comicList.getResults();
+
     }
 
 }

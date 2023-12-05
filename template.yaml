@@ -259,7 +259,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /comicbooks
+            Path: /comicbooks/{seriesId}
             Method: get
             Auth:
               Authorizer: 'NONE'
@@ -311,14 +311,14 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "seriesTitle"
+        - AttributeName: "seriesId"
           AttributeType: "S"
-        - AttributeName: "volumeNumber"
+        - AttributeName: "issueNumber"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "seriesTitle"
+        - AttributeName: "seriesId"
           KeyType: "HASH"
-        - AttributeName: "volumeNumber"
+        - AttributeName: "issueNumber"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "comicbooks"

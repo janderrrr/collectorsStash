@@ -24,32 +24,15 @@ public class GetAllComicBooksActivity {
     public GetAllComicBooksResults handleRequest(final GetAllComicBooksRequest getAllComicBooksRequest){
         log.info("Received GetAllComicBooksRequest {}", getAllComicBooksRequest);
 
-        List<ComicBook> comicBookList = comicDao.getAllComicBooks(
-                getAllComicBooksRequest.getSeriesTitle(),
-                getAllComicBooksRequest.getVolumeNumber()
-        );
+        String requestedSeriesId = getAllComicBooksRequest.getSeriesId();
 
-        List<ComicBookModel> comicBookModels = new ModelConverter().toComicBookModelList(comicBookList);
+        List<ComicBook> comicBooks = comicDao.getAllComicBooks(requestedSeriesId);
 
-        String seriesTitle = null;
-        String volumeNumber = null;
+        List<ComicBookModel> comicModels = new ModelConverter().toComicBookModelList(comicBooks);
 
-        if(!comicBookModels.isEmpty()){
-            ComicBookModel model = comicBookModels.get(comicBookModels.size() - 1);
-            seriesTitle = model.getSeriesTitle();
-            volumeNumber = model.getVolumeNumber();
-        }
-
-        GetAllComicBooksResults results = GetAllComicBooksResults.builder()
-                .withComicList(comicBookModels)
-                .withSeriesTitle(seriesTitle)
-                .withVolumeNumber(volumeNumber)
+        return GetAllComicBooksResults.builder()
+                .withComicList(comicModels)
                 .build();
-
-
-        log.info("results: {}", results.toString());
-
-        return results;
 
     }
 }

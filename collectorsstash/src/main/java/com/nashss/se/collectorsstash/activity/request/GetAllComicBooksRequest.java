@@ -1,27 +1,20 @@
 package com.nashss.se.collectorsstash.activity.request;
 
 public class GetAllComicBooksRequest {
-    private String seriesTitle;
-    private String volumeNumber;
+    private String seriesId;
 
-    private GetAllComicBooksRequest(String seriesTitle, String volumeNumber) {
-        this.seriesTitle = seriesTitle;
-        this.volumeNumber = volumeNumber;
+    private GetAllComicBooksRequest(String seriesId) {
+        this.seriesId = seriesId;
     }
 
-    public String getSeriesTitle() {
-        return seriesTitle;
-    }
-
-    public String getVolumeNumber() {
-        return volumeNumber;
+    public String getSeriesId() {
+        return seriesId;
     }
 
     @Override
     public String toString() {
         return "GetAllComicBooksRequest{" +
-                "seriesTitle='" + seriesTitle + '\'' +
-                ", volumeNumber='" + volumeNumber + '\'' +
+                "seriesId='" + seriesId + '\'' +
                 '}';
     }
 
@@ -34,33 +27,24 @@ public class GetAllComicBooksRequest {
      * @return new Builder of ComicModel
      */
     public static class Builder {
-        private String seriesTitle;
-        private String volumeNumber;
+        private String seriesId;
 
         /**
-         * @param seriesTitle  String
-         * @return seriesTitle
+         * @param seriesId String
+         * @return seriesId
          */
 
-        public Builder withSeriesTitle(String seriesTitle){
-            this.seriesTitle = seriesTitle;
-            return this;
-        }
-        /**
-         * @param volumeNumber String
-         * @return volumeNumber
-         */
-        public Builder withVolumeNumber(String volumeNumber) {
-            this.volumeNumber = volumeNumber;
+        public Builder withSeriesId(String seriesId){
+            this.seriesId = seriesId;
             return this;
         }
 
         /**
          *
-         * @return Request with passed in series and volumeNumber
+         * @return Request with passed in seriesId
          */
         public GetAllComicBooksRequest build(){
-            return new GetAllComicBooksRequest(seriesTitle, volumeNumber);
+            return new GetAllComicBooksRequest(seriesId);
         }
 
     }

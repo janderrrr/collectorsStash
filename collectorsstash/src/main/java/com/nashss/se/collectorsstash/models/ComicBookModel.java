@@ -3,27 +3,34 @@ package com.nashss.se.collectorsstash.models;
 import java.util.Objects;
 
 public class ComicBookModel {
-    private final String seriesTitle;
+    private final String seriesId;
+    private final String title;
     private final String volumeNumber;
     private final String issueNumber;
-    private final String date;
+    private final String year;
     private final int price;
     private final Boolean isFavorite;
     private final String publisher;
 
 
-    public ComicBookModel(String seriesTitle, String volumeNumber, String issueNumber, String date, int price, Boolean isFavorite, String publisher) {
-        this.seriesTitle = seriesTitle;
+    public ComicBookModel(String seriesId, String title, String volumeNumber,
+                          String issueNumber, String year, int price, Boolean isFavorite, String publisher) {
+        this.seriesId = seriesId;
+        this.title = title;
         this.volumeNumber = volumeNumber;
         this.issueNumber = issueNumber;
-        this.date = date;
+        this.year = year;
         this.price = price;
         this.isFavorite = isFavorite;
         this.publisher = publisher;
     }
 
-    public String getSeriesTitle() {
-        return seriesTitle;
+    public String getSeriesId() {
+        return seriesId;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String getVolumeNumber() {
@@ -34,8 +41,8 @@ public class ComicBookModel {
         return issueNumber;
     }
 
-    public String getDate() {
-        return date;
+    public String getYear() {
+        return year;
     }
 
     public int getPrice() {
@@ -55,31 +62,35 @@ public class ComicBookModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComicBookModel that = (ComicBookModel) o;
-        return price == that.price && Objects.equals(seriesTitle, that.seriesTitle) && Objects.equals(volumeNumber, that.volumeNumber) &&
-                Objects.equals(issueNumber, that.issueNumber) && Objects.equals(date, that.date) && Objects.equals(isFavorite, that.isFavorite) &&
-                Objects.equals(publisher, that.publisher);
+        return price == that.price && Objects.equals(seriesId, that.seriesId) && Objects.equals(title, that.title) && Objects.equals(volumeNumber, that.volumeNumber) && Objects.equals(issueNumber, that.issueNumber) && Objects.equals(year, that.year) && Objects.equals(isFavorite, that.isFavorite) && Objects.equals(publisher, that.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seriesTitle, volumeNumber, issueNumber, date, price, isFavorite, publisher);
+        return Objects.hash(seriesId, title, volumeNumber, issueNumber, year, price, isFavorite, publisher);
     }
+
     //CHECKSTYLE:OFF:BUILDER
     public static Builder builder(){
         return new Builder();
     }
 
     public static class Builder {
-        private String seriesTitle;
+        private String seriesId;
+        private String title;
         private String volumeNumber;
         private String issueNumber;
-        private String date;
+        private String year;
         private int price;
         private Boolean isFavorite;
         private String publisher;
 
-        public Builder withSeriesTitle(String seriesTitle) {
-            this.seriesTitle = seriesTitle;
+        public Builder withSeriesId(String seriesId) {
+            this.seriesId = seriesId;
+            return this;
+        }
+        public Builder withTitle(String title) {
+            this.title = title;
             return this;
         }
 
@@ -93,8 +104,8 @@ public class ComicBookModel {
             return this;
         }
 
-        public Builder withDate(String date){
-            this.date = date;
+        public Builder withYear(String year){
+            this.year = year;
             return this;
         }
 
@@ -114,7 +125,7 @@ public class ComicBookModel {
         }
 
         public ComicBookModel build(){
-            return new ComicBookModel(seriesTitle, volumeNumber, issueNumber, date, price, isFavorite, publisher);
+            return new ComicBookModel(seriesId,title, volumeNumber, issueNumber, year, price, isFavorite, publisher);
         }
     }
 }

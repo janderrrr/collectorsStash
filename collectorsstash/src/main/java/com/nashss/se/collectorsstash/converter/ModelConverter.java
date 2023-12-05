@@ -23,10 +23,11 @@ public class ModelConverter {
      */
     public ComicBookModel toComicModel(ComicBook comicBook) {
         return ComicBookModel.builder()
-                .withSeriesTitle(comicBook.getSeriesTitle())
+                .withSeriesId(comicBook.getSeriesId())
+                .withTitle(comicBook.getTitle())
                 .withVolumeNumber(comicBook.getVolumeNumber())
                 .withIssueNumber(comicBook.getIssueNumber())
-                .withDate(comicBook.getDate())
+                .withYear(comicBook.getYear())
                 .withPrice(comicBook.getPrice())
                 .withIsFavorite(comicBook.isFavorite())
                 .withPublisher(comicBook.getPublisher())

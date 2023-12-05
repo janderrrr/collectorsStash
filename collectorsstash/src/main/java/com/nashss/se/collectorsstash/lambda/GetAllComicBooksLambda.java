@@ -13,10 +13,9 @@ public class GetAllComicBooksLambda
 
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetAllComicBooksRequest> input, Context context) {
-        return super.runActivity(() -> input.fromQuery(query ->
+        return super.runActivity(() -> input.fromPath(path ->
                 GetAllComicBooksRequest.builder()
-                        .withSeriesTitle(query.get("seriesTitle"))
-                        .withVolumeNumber(query.get("volumeNumber"))
+                        .withSeriesId(path.get("seriesId"))
                         .build()), (request, serviceComponent) ->
                 serviceComponent.provideGetAllComicBooksActivity().handleRequest(request)
         );

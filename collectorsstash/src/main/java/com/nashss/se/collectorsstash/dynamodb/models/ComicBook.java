@@ -11,49 +11,67 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "comicbooks")
 public class ComicBook {
-    private String seriesTitle;
-    private String volumeNumber;
+    private String seriesId;
     private String issueNumber;
-    private String date;
+    private String title;
+    private String volumeNumber;
+    private String year;
     private int price;
     private boolean isFavorite;
     private String publisher;
 
-
-    /**
-     *
-     * @return id, the partition key of the comicBook in the ComicBooks table
-     */
-    @DynamoDBHashKey(attributeName = "seriesTitle")
-    public String getSeriesTitle() {
-        return seriesTitle;
+    @DynamoDBHashKey(attributeName = "seriesId")
+    public String getSeriesId() {
+        return seriesId;
     }
 
-    /**
-     *
-     * @return volumeNumber of the ComicBook volumeNumber
-     */
-    @DynamoDBRangeKey(attributeName = "volumeNumber")
-    public String getVolumeNumber() {
-        return volumeNumber;
+    public void setSeriesId(String seriesId) {
+        this.seriesId = seriesId;
     }
-    /**
-     *
-     * @return issueNumber of the ComicBook issueNumber
-     */
-    @DynamoDBAttribute(attributeName = "issueNumber")
+
+    @DynamoDBRangeKey(attributeName = "issueNumber")
     public String getIssueNumber() {
         return issueNumber;
     }
 
-    @DynamoDBAttribute(attributeName = "date")
-    public String getDate() {
-        return date;
+    public void setIssueNumber(String issueNumber) {
+        this.issueNumber = issueNumber;
+    }
+
+    @DynamoDBAttribute(attributeName = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @DynamoDBAttribute(attributeName = "volumeNumber")
+    public String getVolumeNumber() {
+        return volumeNumber;
+    }
+
+    public void setVolumeNumber(String volumeNumber) {
+        this.volumeNumber = volumeNumber;
+    }
+
+    @DynamoDBAttribute(attributeName = "year")
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     @DynamoDBAttribute(attributeName = "price")
     public int getPrice() {
         return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @DynamoDBAttribute(attributeName = "isFavorite")
@@ -62,34 +80,13 @@ public class ComicBook {
         return isFavorite;
     }
 
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
     @DynamoDBAttribute(attributeName = "publisher")
     public String getPublisher() {
         return publisher;
-    }
-
-
-    public void setSeriesTitle(String seriesTitle) {
-        this.seriesTitle = seriesTitle;
-    }
-
-    public void setVolumeNumber(String volumeNumber) {
-        this.volumeNumber = volumeNumber;
-    }
-
-    public void setIssueNumber(String issueNumber) {
-        this.issueNumber = issueNumber;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
     }
 
     public void setPublisher(String publisher) {
@@ -101,15 +98,11 @@ public class ComicBook {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComicBook comicBook = (ComicBook) o;
-        return price == comicBook.price && isFavorite == comicBook.isFavorite &&
-                Objects.equals(seriesTitle, comicBook.seriesTitle) &&
-                Objects.equals(volumeNumber, comicBook.volumeNumber) &&
-                Objects.equals(issueNumber, comicBook.issueNumber) &&
-                Objects.equals(date, comicBook.date) && Objects.equals(publisher, comicBook.publisher);
+        return price == comicBook.price && isFavorite == comicBook.isFavorite && Objects.equals(seriesId, comicBook.seriesId) && Objects.equals(issueNumber, comicBook.issueNumber) && Objects.equals(title, comicBook.title) && Objects.equals(volumeNumber, comicBook.volumeNumber) && Objects.equals(year, comicBook.year) && Objects.equals(publisher, comicBook.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seriesTitle, volumeNumber, issueNumber, date, price, isFavorite, publisher);
+        return Objects.hash(seriesId, issueNumber, title, volumeNumber, year, price, isFavorite, publisher);
     }
 }
