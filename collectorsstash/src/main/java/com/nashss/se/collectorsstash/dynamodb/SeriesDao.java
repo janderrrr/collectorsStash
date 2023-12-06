@@ -1,6 +1,7 @@
 package com.nashss.se.collectorsstash.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMappingException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.nashss.se.collectorsstash.dynamodb.models.Series;
 import com.nashss.se.collectorsstash.exceptions.SeriesNotFoundException;
@@ -40,6 +41,21 @@ public class SeriesDao {
         }
         metricsPublisher.addCount(MetricsConstants.GETSERIES_SUCCESS_COUNT, 1);
         return seriesList;
+    }
+
+    public Series removeSeries(String customerId, String seriesId) {
+        if(seriesId == null || customerId == null) {
+            throw new IllegalArgumentException("series cannot be null");
+        }
+        Series seriesToDelete = new Series();
+        seriesToDelete.setCustomerId(customerId);
+        seriesToDelete.setSeriesId(seriesId);
+        try {
+            mapper.delete(seriesToDelete);
+        } catch (DynamoDBMappingException e) {
+            throw new RuntimeException("Error deleting Series item", e);
+        }
+        return seriesToDelete;
     }
     /**
      * Saves (creates or updates) the given series.
