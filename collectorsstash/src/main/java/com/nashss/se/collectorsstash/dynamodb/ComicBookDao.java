@@ -46,5 +46,9 @@ public class ComicBookDao {
         return comicList.getResults();
 
     }
+//
+//    public ComicBook getOneComicBook(String seriesId, String issueNumber) {
+//        ComicBook comicBook = new ComicBook();
+//    }
 
 }

@@ -1,9 +1,6 @@
 package com.nashss.se.collectorsstash.dependency;
 
-import com.nashss.se.collectorsstash.activity.CreateSeriesActivity;
-import com.nashss.se.collectorsstash.activity.GetAllComicBooksActivity;
-import com.nashss.se.collectorsstash.activity.GetSeriesActivity;
-import com.nashss.se.collectorsstash.activity.RemoveSeriesActivity;
+import com.nashss.se.collectorsstash.activity.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -26,4 +23,6 @@ public interface ServiceComponent {
     CreateSeriesActivity provideCreateSeriesActivity();
 
     RemoveSeriesActivity provideRemoveSeriesActivity();
+
+    UpdateSeriesActivity provideUpdateSeriesActivity();
 }

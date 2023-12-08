@@ -92,6 +92,31 @@ export default class CollectorsStash extends BindingClass {
             this.handleError(error, errorCallback);
         }
     }
+async removeSeries(seriesId, customerId, errorCallback) {
+    try {
+        const token = await this.getTokenOrThrow("Only authenticated users can remove series.");
+
+        const response = await this.axiosClient.delete(`/series/${seriesId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            data: {
+                customerId: customerId
+            }
+        });
+
+        if (response.status === 200) {
+            return { success: true, message: "Series removed successfully" };
+        } else {
+            return { success: false, error: "Unknown error" };
+        }
+    } catch (error) {
+        this.handleError(error, errorCallback);
+        throw error;
+    }
+}
+
+
     /**
      * Helper method to log the error and run any error functions.
      * @param error The error received from the server.

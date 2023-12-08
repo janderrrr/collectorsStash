@@ -22,6 +22,16 @@ public class CreateSeriesActivity {
 
     public CreateSeriesResults handleRequest(final CreateSeriesRequest createSeriesRequest){
         log.info("Received CreateSeriesRequest {}", createSeriesRequest);
+//
+//        // Check if the series already exists
+//        if (seriesDao.seriesExist(createSeriesRequest.getCustomerId(), createSeriesRequest.getTitle(), createSeriesRequest.getVolumeNumber())) {
+//            // Series with the same title and volume number already exists
+//            log.warn("Series with the same title and volume number already exists.");
+//            // You might want to throw an exception or handle this situation accordingly
+//            // For simplicity, let's return a result indicating failure
+//            return CreateSeriesResults.builder()
+//                    .build();
+//        }
 
         Series series = new Series();
         series.setCustomerId(createSeriesRequest.getCustomerId());
@@ -29,6 +39,7 @@ public class CreateSeriesActivity {
         series.setTitle(createSeriesRequest.getTitle());
         series.setVolumeNumber(createSeriesRequest.getVolumeNumber());
         //add checks
+
 
         seriesDao.saveSeries(series);
 

@@ -6,32 +6,33 @@ import DataStore from '../util/DataStore';
 class ViewSeries extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displaySeries'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displaySeries', 'removeSeries'], this);
         this.dataStore = new DataStore();
         this.client = new CollectorStashClient();
         this.header = new Header(this.dataStore);
         console.log("viewSeries constructor");
     }
 
-async clientLoaded() {
-    try {
-        console.log("Client loaded is being called..");
-        const result = await this.client.getSeries();
-        console.log("Result in clientLoaded", result);
+    async clientLoaded() {
+        try {
+            console.log("Client loaded is being called..");
+            const result = await this.client.getSeries();
+            console.log("Result in clientLoaded", result);
 
-        if (result && result.series) {
-            const series = result.series;
-            this.dataStore.set('series', series);
+            if (result && result.series) {
+                const series = result.series;
+                this.dataStore.set('series', series);
 
-            // Call the displaySeries method after setting the series data
-            this.displaySeries();
-        } else {
-            console.error("Invalid series data in the result:", result);
+                // Call the displaySeries method after setting the series data
+                this.displaySeries();
+            } else {
+                console.error("Invalid series data in the result:", result);
+            }
+        } catch (error) {
+            console.error("Error while loading Series:", error);
         }
-    } catch (error) {
-        console.error("Error while loading Series:", error);
     }
-}
+
 
 displaySeries() {
     console.log("displaySeries called");
@@ -52,16 +53,85 @@ displaySeries() {
         seriesElement.className = 'series-item';
 
         const titleParagraph = document.createElement('p');
-        titleParagraph.innerText = `Title: ${seriesItem.title || 'N/A'}`;
+        titleParagraph.innerHTML = `<strong>Series Title:</strong> <strong>${seriesItem.title || 'N/A'}</strong>`;
 
         const volumeNumberParagraph = document.createElement('p');
-        volumeNumberParagraph.innerText = `Volume Number: ${seriesItem.volumeNumber || 'N/A'}`;
+        volumeNumberParagraph.innerHTML = `<strong>Volume Number:</strong> <strong>${seriesItem.volumeNumber || 'N/A'}</strong>`;
+
+        const removeButton = document.createElement('button');
+        removeButton.innerText = 'Remove';
+        removeButton.className = 'remove-button';
+        // Add a data attribute to store series ID for each remove button
+        removeButton.dataset.seriesId = seriesItem.seriesId || seriesItem.id;
+
+        const updateButton = document.createElement('button');
+        updateButton.innerText = 'Update';
+        updateButton.className = 'update-button';
+        // Add a data attribute to store series ID for each update button
+        updateButton.dataset.seriesId = seriesItem.seriesId || seriesItem.id;
 
         seriesElement.appendChild(titleParagraph);
         seriesElement.appendChild(volumeNumberParagraph);
+        seriesElement.appendChild(removeButton);
+        seriesElement.appendChild(updateButton);
 
         seriesContainer.appendChild(seriesElement);
+
+        // Ensure customerId and errorCallback are accessible within this scope
+        const customerId = seriesItem.customerId;
+        const errorCallback = (error) => {
+            console.error('Error:', error);
+            // Handle the error as needed
+        };
+
+        // Attach a click event listener to each remove button for removal
+        removeButton.addEventListener('click', (event) => {
+            const seriesId = event.target.dataset.seriesId;
+            this.removeSeries(seriesId, customerId, errorCallback);
+        });
+
+        // Attach a click event listener to each update button for navigation
+        updateButton.addEventListener('click', async (event) => {
+            const seriesId = event.target.dataset.seriesId;
+            const isConfirmed = confirm('Are you sure you want to update this series?');
+
+            if (isConfirmed) {
+                this.handleUpdateSeries(seriesId);
+            }
+        });
     });
+}
+
+// Function to handle series updates and navigation to updateSeries.html
+handleUpdateSeries(seriesId) {
+    // Redirect to the update page with the seriesId
+    window.location.href = 'updateSeries.html?seriesId=' + encodeURIComponent(seriesId);
+}
+async removeSeries(seriesId) {
+    // Display a confirmation prompt
+    const isConfirmed = confirm('Are you sure you want to remove this series?');
+
+    if (!isConfirmed) {
+        return; // If not confirmed, do nothing
+    }
+
+    // Proceed with series removal
+    try {
+        console.log(`Removing series with ID: ${seriesId}`);
+        const result = await this.client.removeSeries(seriesId);
+
+        // Check if result is defined and has 'success' property
+        if (result && result.success) {
+            console.log("Series removed successfully");
+            await this.clientLoaded(); // Reload series after removal
+        } else {
+            // Check if result is defined and has 'error' property
+            const errorMessage = result && result.error ? result.error : "Unknown error";
+            console.error("Error while removing series:", errorMessage);
+        }
+    } catch (error) {
+        console.error("Error while removing series:", error);
+    }
 }
 
     mount() {

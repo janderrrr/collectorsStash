@@ -43,6 +43,19 @@ public class SeriesDao {
         return seriesList;
     }
 
+    public Series getOneSeries(String customerId, String seriesId) {
+        Series series = this.mapper.load(Series.class, customerId, seriesId);
+
+        if(series == null) {
+            metricsPublisher.addCount(MetricsConstants.GETSERIES_FAIL_COUNT, 1);
+            throw new SeriesNotFoundException("Could not find series " + seriesId);
+        } else {
+            metricsPublisher.addCount(MetricsConstants.GETSERIES_SUCCESS_COUNT, 1);
+            return series;
+        }
+
+    }
+
     public Series removeSeries(String customerId, String seriesId) {
         if(seriesId == null || customerId == null) {
             throw new IllegalArgumentException("series cannot be null");
@@ -66,6 +79,19 @@ public class SeriesDao {
     public Series saveSeries(Series series) {
         this.mapper.save(series);
         return series;
+    }
+
+    public boolean seriesExist(String customerId, String title, String volumeNumber) {
+        Series series = new Series();
+        series.setCustomerId(customerId);
+        series.setTitle(title);
+        series.setVolumeNumber(volumeNumber);
+
+        DynamoDBQueryExpression<Series> queryExpression = new DynamoDBQueryExpression<Series>()
+                .withHashKeyValues(series);
+
+        List<Series> seriesList = mapper.query(Series.class, queryExpression);
+        return !seriesList.isEmpty();
     }
     //Creating a SeriesId random UUID, to be unique when creating each Series
     public String generateSeriesId(){
