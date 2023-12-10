@@ -27,6 +27,7 @@ module.exports = {
     viewSeries: path.resolve(__dirname, 'src', 'pages', 'viewSeries.js'),
     createSeries: path.resolve(__dirname, 'src', 'pages', 'createSeries.js'),
     viewAllComicBooks: path.resolve(__dirname, 'src', 'pages', 'viewAllComicBooks.js'),
+    updateSeries: path.resolve(__dirname, 'src', 'pages', 'updateSeries.js'),
  },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

@@ -11,7 +11,7 @@ export default class CollectorsStash extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createSeries', 'getSeries'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createSeries', 'getSeries', 'updateSeries'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -115,6 +115,42 @@ async removeSeries(seriesId, customerId, errorCallback) {
         throw error;
     }
 }
+async updateSeries(seriesId, title, volumeNumber, errorCallback) {
+    try {
+        const token = await this.getTokenOrThrow("Only authenticated users can update series.");
+        //needed to add SeriesId in the path because It's being passed in
+        const response = await this.axiosClient.put(`/series/${seriesId}`, {
+            seriesId,
+            title,
+            volumeNumber,
+        }, {
+            headers: {
+                Authorization:  `Bearer ${token}`
+            }
+        });
+
+        return response.data.series;
+    } catch (error) {
+        this.handleError(error, errorCallback);
+    }
+}
+
+async getAllComicBooks(seriesId, errorCallback) {
+    try {
+        const token = await this.getTokenOrThrow("Only authenticated users can view their Comics in a series.");
+        const response = await this.axiosClient.get(`/comicbooks/${seriesId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return {
+            comicbooks: response.data.comicList
+        };
+    } catch (error) {
+        this.handleError(error, errorCallback);
+    }
+}
+
 
 
     /**
