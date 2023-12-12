@@ -25,4 +25,6 @@ public interface ServiceComponent {
     RemoveSeriesActivity provideRemoveSeriesActivity();
 
     UpdateSeriesActivity provideUpdateSeriesActivity();
+
+    CreateComicBookActivity provideCreateComicBookActivity();
 }

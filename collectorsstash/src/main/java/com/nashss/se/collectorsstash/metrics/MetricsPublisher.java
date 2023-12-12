@@ -17,7 +17,7 @@ public class MetricsPublisher {
      * @param cloudWatch AmazonCloudWatch
      */
     @Inject
-    public MetricsPublisher(final AmazonCloudWatch cloudWatch){
+    public MetricsPublisher(final AmazonCloudWatch cloudWatch) {
         this.cloudWatch = cloudWatch;
     }
 
@@ -27,7 +27,7 @@ public class MetricsPublisher {
      * @param metricName name of metric to publish.
      * @param value value of metric.
      */
-    public void addCount(final String metricName, final double value){
+    public void addCount(final String metricName, final double value) {
         addMetric(metricName, value, StandardUnit.Count);
     }
 

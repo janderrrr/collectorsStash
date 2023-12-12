@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/createComicBook.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="background">
+<header class="header" id="header"></header>
+<div class="card">
+    <h2>Create Comic Book</h2>
+    <form class="card-content" id="create-comic-book-form">
+        <!-- Hidden input field for seriesId -->
+        <input type="hidden" id="hidden-series-id" name="seriesId">
+
+        <p class="hidden error" id="error-message"> </p>
+        <p class="form-field">
+            <label>Title</label>
+            <input type="text" required id="comic-title" placeholder="Enter comic title">
+        </p>
+        <p class="form-field">
+            <label>Issue Number</label>
+            <input type="number" required class="validated-field" id="issue-number"
+                   placeholder="Enter issue number" autofocus>
+        </p>
+        <p class="form-field">
+            <label>Volume Number</label>
+            <input type="number" id="volume-number" class="volume-number" placeholder="Enter volume number"
+                   required>
+        </p>
+        <p class="form-field">
+            <label>Year</label>
+            <input type="number" id="comic-year" placeholder="Enter comic year">
+        </p>
+        <p class="form-field">
+            <label>Publisher</label>
+            <input type="text" id="comic-publisher" placeholder="Enter comic publisher">
+        </p>
+        <p class="form-field">
+            <label>Price</label>
+            <input type="number" step="0.01" required id="comic-price" placeholder="Enter comic price">
+        </p>
+        <p class="form-field">
+            <label>Is Favorite</label>
+            <select id="is-favorite" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </p>
+        <p>
+            <a href="#" class="button" id="create">Create Comic Book</a>
+        </p>
+    </form>
+</div>
+</body>
+
+</html>

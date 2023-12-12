@@ -46,6 +46,11 @@ public class ComicBookDao {
         return comicList.getResults();
 
     }
+
+    public ComicBook comicSave(ComicBook comicbook) {
+        this.mapper.save(comicbook);
+        return comicbook;
+    }
 //
 //    public ComicBook getOneComicBook(String seriesId, String issueNumber) {
 //        ComicBook comicBook = new ComicBook();

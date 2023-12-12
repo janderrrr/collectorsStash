@@ -24,6 +24,7 @@ public class ModelConverter {
     public ComicBookModel toComicModel(ComicBook comicBook) {
         return ComicBookModel.builder()
                 .withSeriesId(comicBook.getSeriesId())
+                .withCustomerId(comicBook.getCustomerId())
                 .withTitle(comicBook.getTitle())
                 .withVolumeNumber(comicBook.getVolumeNumber())
                 .withIssueNumber(comicBook.getIssueNumber())

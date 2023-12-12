@@ -14,6 +14,7 @@ public class ComicBook {
     private String seriesId;
     private String issueNumber;
     private String title;
+    private String customerId;
     private String volumeNumber;
     private String year;
     private int price;
@@ -93,16 +94,26 @@ public class ComicBook {
         this.publisher = publisher;
     }
 
+    @DynamoDBAttribute(attributeName = "customerId")
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComicBook comicBook = (ComicBook) o;
-        return price == comicBook.price && isFavorite == comicBook.isFavorite && Objects.equals(seriesId, comicBook.seriesId) && Objects.equals(issueNumber, comicBook.issueNumber) && Objects.equals(title, comicBook.title) && Objects.equals(volumeNumber, comicBook.volumeNumber) && Objects.equals(year, comicBook.year) && Objects.equals(publisher, comicBook.publisher);
+        return price == comicBook.price && isFavorite == comicBook.isFavorite && Objects.equals(seriesId, comicBook.seriesId) && Objects.equals(issueNumber, comicBook.issueNumber) &&
+                Objects.equals(title, comicBook.title) && Objects.equals(customerId, comicBook.customerId) && Objects.equals(volumeNumber, comicBook.volumeNumber) && Objects.equals(year, comicBook.year) && Objects.equals(publisher, comicBook.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seriesId, issueNumber, title, volumeNumber, year, price, isFavorite, publisher);
+        return Objects.hash(seriesId, issueNumber, title, customerId, volumeNumber, year, price, isFavorite, publisher);
     }
 }

@@ -11,7 +11,7 @@ export default class CollectorsStash extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createSeries', 'getSeries', 'updateSeries'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createSeries', 'getSeries', 'updateSeries', 'getAllComicBooks', 'createComicBook'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -74,6 +74,28 @@ export default class CollectorsStash extends BindingClass {
                 this.handleError(error, errorCallback);
             }
         }
+async createComicBook(seriesId, title, volumeNumber, issueNumber, year, publisher, price, isFavorite, errorCallback) {
+    try {
+        const token = await this.getTokenOrThrow("Only authenticated users can create series.");
+        const response = await this.axiosClient.post(`/comicbooks/${seriesId}`, {
+            seriesId,
+            title,
+            volumeNumber,
+            issueNumber,
+            year,
+            publisher,
+            price,
+            isFavorite,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data.comicbooks;
+    } catch (error) {
+        this.handleError(error, errorCallback);
+    }
+}
 
 
     async getSeries(errorCallback) {
@@ -143,10 +165,21 @@ async getAllComicBooks(seriesId, errorCallback) {
                 Authorization: `Bearer ${token}`
             }
         });
+
+        // Log the entire response for debugging
+        console.log("Full response:", response);
+
+        // Log the response data for debugging
+        console.log("Response data:", response.data);
+
         return {
             comicbooks: response.data.comicList
         };
     } catch (error) {
+        // Log the error for debugging
+        console.error("Error in getAllComicBooks:", error);
+
+        // Call the error handling method
         this.handleError(error, errorCallback);
     }
 }
