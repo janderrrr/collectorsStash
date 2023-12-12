@@ -22,6 +22,7 @@ public class ComicBook {
     private String publisher;
 
     @DynamoDBHashKey(attributeName = "seriesId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "FavComicIndex", attributeName = "seriesId")
     public String getSeriesId() {
         return seriesId;
     }
@@ -67,6 +68,7 @@ public class ComicBook {
     }
 
     @DynamoDBAttribute(attributeName = "price")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "FavComicIndex", attributeName = "price")
     public int getPrice() {
         return price;
     }

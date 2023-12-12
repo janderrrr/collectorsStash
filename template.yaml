@@ -224,20 +224,22 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/events"
 
-        - PolicyName: 'AccessVendorsTable'
+        - PolicyName: 'AccessSeriesTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/Vendors"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/series"
         - PolicyName: 'AccessComicBooksTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/comicbooks"
+                Resource:
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/comicbooks"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/comicbooks/index/PriceComicIndex"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -372,6 +374,8 @@ Resources:
           AttributeType: "S"
         - AttributeName: "issueNumber"
           AttributeType: "S"
+        - AttributeName: "price"
+          AttributeType: "N"
       KeySchema:
         - AttributeName: "seriesId"
           KeyType: "HASH"
@@ -379,6 +383,15 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "comicbooks"
+      GlobalSecondaryIndexes:
+        - IndexName: "PriceComicIndex"
+          KeySchema:
+            - AttributeName: "seriesId"
+              KeyType: "HASH"
+            - AttributeName: "price"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
   SeriesTable:
     Type: AWS::DynamoDB::Table
     Properties:
