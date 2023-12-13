@@ -11,7 +11,7 @@ export default class CollectorsStash extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createSeries', 'getSeries', 'updateSeries', 'getAllComicBooks', 'createComicBook'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createSeries', 'getSeries', 'updateSeries', 'getAllComicBooks', 'createComicBook', 'getPriceComic'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -161,6 +161,32 @@ async getAllComicBooks(seriesId, errorCallback) {
     try {
         const token = await this.getTokenOrThrow("Only authenticated users can view their Comics in a series.");
         const response = await this.axiosClient.get(`/comicbooks/${seriesId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        // Log the entire response for debugging
+        console.log("Full response:", response);
+
+        // Log the response data for debugging
+        console.log("Response data:", response.data);
+
+        return {
+            comicbooks: response.data.comicList
+        };
+    } catch (error) {
+        // Log the error for debugging
+        console.error("Error in getAllComicBooks:", error);
+
+        // Call the error handling method
+        this.handleError(error, errorCallback);
+    }
+}
+async getPriceComic(seriesId, price, errorCallback) {
+    try {
+        const token = await this.getTokenOrThrow("Only authenticated users can view their Comics in a series.");
+        const response = await this.axiosClient.get(`/comicbooks/${seriesId}/${price}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

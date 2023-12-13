@@ -56,4 +56,28 @@ public class ComicBookDao {
 //        ComicBook comicBook = new ComicBook();
 //    }
 
+    public List<ComicBook> getComicByPrice(String seriesId, int price) {
+        ComicBook comicBook = new ComicBook();
+        comicBook.setSeriesId(seriesId);
+
+        DynamoDBQueryExpression<ComicBook> queryExpression = new DynamoDBQueryExpression<ComicBook>()
+                .withIndexName("PriceComicIndex")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("seriesId = :seriesId and price >= :priceValue")
+                .withExpressionAttributeValues(
+                        Map.of(":seriesId", new AttributeValue().withS(seriesId),
+                                ":priceValue", new AttributeValue().withN(Integer.toString(price)))
+                )
+                .withLimit(PAGINATION_LIMIT);
+
+        QueryResultPage<ComicBook> comicList = mapper.queryPage(ComicBook.class, queryExpression);
+
+        if(comicList == null) {
+            metricsPublisher.addCount(MetricsConstants.GETALLCOMICBOOKS_FAIL_COUNT, 1);
+            throw new ComicBookNotFoundException("Comic book not found");
+        }
+
+        metricsPublisher.addCount(MetricsConstants.GETALLCOMICBOOKS_SUCCESS_COUNT, 0);
+        return comicList.getResults();
+    }
 }

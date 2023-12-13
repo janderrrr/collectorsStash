@@ -16,11 +16,11 @@ public class CreateSeriesActivity {
     private final SeriesDao seriesDao;
 
     @Inject
-    public CreateSeriesActivity(SeriesDao seriesDao){
+    public CreateSeriesActivity(SeriesDao seriesDao) {
         this.seriesDao = seriesDao;
     }
 
-    public CreateSeriesResults handleRequest(final CreateSeriesRequest createSeriesRequest){
+    public CreateSeriesResults handleRequest(final CreateSeriesRequest createSeriesRequest) {
         log.info("Received CreateSeriesRequest {}", createSeriesRequest);
 //
 //        // Check if the series already exists

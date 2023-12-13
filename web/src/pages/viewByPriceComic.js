@@ -3,14 +3,14 @@ import Header from '../components/header';
 import BindingClass from '../util/bindingClass';
 import DataStore from '../util/DataStore';
 
-class ViewAllComicBooks extends BindingClass {
+class ViewByPriceComicBooks extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayComics', 'createPropertyDiv'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayComics'], this);
         this.dataStore = new DataStore();
         this.client = new CollectorStashClient();
         this.header = new Header(this.dataStore);
-        console.log("viewAllComicBooks constructor");
+        console.log("viewByPriceComicBooks constructor");
 
         // Call clientLoaded after the client has been initialized
         this.clientLoaded();
@@ -18,19 +18,20 @@ class ViewAllComicBooks extends BindingClass {
 
     async clientLoaded() {
         try {
-            // Extract seriesId from the URL
+            // Extract seriesId and price from the URL
             const urlParams = new URLSearchParams(window.location.search);
             const seriesId = urlParams.get('seriesId');
+            const price = parseFloat(urlParams.get('price'));
 
-            // Check if seriesId is present
-            if (!seriesId) {
-                console.error("Series ID is missing in the URL.");
+            // Check if seriesId and price are present
+            if (!seriesId || isNaN(price)) {
+                console.error("Series ID or price is missing or invalid in the URL.");
                 return;
             }
 
-            // Fetch comicbooks data for the specified seriesId
-            const result = await this.client.getAllComicBooks(seriesId);
-            console.log("Result in the clientLoaded", result);
+            // Fetch comicbooks data for the specified seriesId and price
+            const result = await this.client.getPriceComic(seriesId, price);
+            console.log("Result in clientLoaded:", result);
 
             // Check if comicbooks array is present in the result
             if (result && result.comicbooks) {
@@ -40,21 +41,6 @@ class ViewAllComicBooks extends BindingClass {
                 this.displayComics();
             } else {
                 console.error("Comic books data is missing in the result:", result);
-            }
-
-            // Attach event listener to the "Sort by Price" button
-            const sortByPriceButton = document.getElementById('sort-by-price');
-            if (sortByPriceButton) {
-                sortByPriceButton.addEventListener('click', () => {
-                    // Retrieve the seriesId from the URL
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const seriesId = urlParams.get('seriesId');
-
-                    // Navigate to viewByPriceComic.html with seriesId and predefined price (e.g., 0)
-                    window.location.href = `viewByPriceComic.html?seriesId=${seriesId}&price=0`;
-                });
-            } else {
-                console.error("Sort by Price button not found.");
             }
         } catch (error) {
             console.error("Error in clientLoaded:", error);
@@ -71,22 +57,25 @@ class ViewAllComicBooks extends BindingClass {
             return;
         }
 
-        // Sort the comic books based on issueNumber
-        comicBooksData.sort((a, b) => a.issueNumber - b.issueNumber);
+        // Extract the desired price from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const desiredPrice = parseFloat(urlParams.get('price'));
+
+        // Filter comic books based on the desired price
+    const filteredComicBooks = comicBooksData.filter(comic => comic.price !== undefined && parseFloat(comic.price) >= desiredPrice);
+
+        // Sort the filtered comic books based on price
+        filteredComicBooks.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
 
         const comicBooksContainer = document.getElementById('comicBooksContainer');
 
         comicBooksContainer.innerHTML = '';
 
-        comicBooksData.forEach((comic) => {
+        filteredComicBooks.forEach((comic) => {
             const comicElement = document.createElement('div');
             comicElement.className = 'comic-book';
 
-            comicElement.style.display = 'grid';
-            comicElement.style.gridTemplateColumns = '1fr 1fr';
-            // Create a hidden div for seriesId
-            const seriesIdDiv = this.createPropertyDiv('Series ID:', comic.seriesId || 'N/A');
-            seriesIdDiv.style.display = 'none'; // Hide the seriesId
+            // Modify the display logic as needed
             const titleDiv = this.createPropertyDiv('Title:', comic.title || 'N/A');
             const issueNumberDiv = this.createPropertyDiv('Issue Number:', comic.issueNumber || 'N/A');
             const volumeNumberDiv = this.createPropertyDiv('Volume Number:', comic.volumeNumber || 'N/A');
@@ -95,9 +84,8 @@ class ViewAllComicBooks extends BindingClass {
             const isFavoriteDiv = this.createPropertyDiv('Is Favorite:', comic.favorite || 'N/A');
             const publisherDiv = this.createPropertyDiv('Publisher:', comic.publisher || 'N/A');
 
-            comicElement.appendChild(seriesIdDiv);
-            comicElement.appendChild(issueNumberDiv);
             comicElement.appendChild(titleDiv);
+            comicElement.appendChild(issueNumberDiv);
             comicElement.appendChild(volumeNumberDiv);
             comicElement.appendChild(yearDiv);
             comicElement.appendChild(priceDiv);
@@ -134,29 +122,29 @@ class ViewAllComicBooks extends BindingClass {
         const seriesId = urlParams.get('seriesId');
 
         // Get the existing "Create Comic Book" button
-        const createComicButton = document.getElementById('create');
+        const returnToViewComicsButton = document.getElementById('return-to-view-comics');
 
         // Check if the button exists
-        if (createComicButton) {
-            // Add a click event listener to navigate to createComicBook.html with seriesId
-            createComicButton.addEventListener('click', () => {
+        if (returnToViewComicsButton) {
+            // Add a click event listener to navigate back to viewAllComicBooks.html with seriesId included in the URL
+            returnToViewComicsButton.addEventListener('click', () => {
                 // Ensure that seriesId is available before navigating
                 if (seriesId) {
-                    // Navigate to createComicBook.html with seriesId included in the URL
-                    window.location.href = `createComicBook.html?seriesId=${seriesId}`;
+                    // Navigate to viewAllComicBooks.html with seriesId included in the URL
+                    window.location.href = `viewAllComicBooks.html?seriesId=${seriesId}`;
                 } else {
                     console.error("Series ID is missing.");
                 }
             });
         } else {
-            console.error("Create Comic Book button not found.");
+            console.error("Return to View Comics button not found.");
         }
     }
 }
 
 const main = async () => {
-    const viewAllComicBooks = new ViewAllComicBooks();
-    viewAllComicBooks.mount();
+    const viewByPriceComicBooks = new ViewByPriceComicBooks();
+    viewByPriceComicBooks.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);

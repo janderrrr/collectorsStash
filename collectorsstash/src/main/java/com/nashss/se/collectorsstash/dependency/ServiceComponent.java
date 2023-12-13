@@ -27,4 +27,5 @@ public interface ServiceComponent {
     UpdateSeriesActivity provideUpdateSeriesActivity();
 
     CreateComicBookActivity provideCreateComicBookActivity();
+    GetPriceComicBookActivity provideGetPriceComicBookActivity();
 }

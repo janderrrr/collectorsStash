@@ -44,9 +44,10 @@ public class GetPriceComicBookRequest {
             this.price = price;
             return this;
         }
-    }
 
-    public GetPriceComicBookRequest build() {
-        return new GetPriceComicBookRequest(seriesId, price);
+
+        public GetPriceComicBookRequest build() {
+            return new GetPriceComicBookRequest(seriesId, price);
+        }
     }
 }
