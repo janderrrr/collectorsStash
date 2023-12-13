@@ -45,13 +45,25 @@ class ViewAllComicBooks extends BindingClass {
             // Attach event listener to the "Sort by Price" button
             const sortByPriceButton = document.getElementById('sort-by-price');
             if (sortByPriceButton) {
-                sortByPriceButton.addEventListener('click', () => {
-                    // Retrieve the seriesId from the URL
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const seriesId = urlParams.get('seriesId');
+                sortByPriceButton.addEventListener('click', async () => {
+                    // Prompt the user for the desired price
+                    const desiredPrice = prompt("Enter the desired price:");
 
-                    // Navigate to viewByPriceComic.html with seriesId and predefined price (e.g., 0)
-                    window.location.href = `viewByPriceComic.html?seriesId=${seriesId}&price=0`;
+                    // Check if the user entered a price
+                    if (desiredPrice !== null) {
+                        try {
+                            // Call the API method to get comic books based on seriesId and price
+                            const priceResult = await this.client.getPriceComic(seriesId, desiredPrice);
+
+                            // Update the stored comicbooks data with the sorted data
+                            this.dataStore.set('comicbooks', priceResult.comicbooks);
+
+                            // Display the comics with the updated data
+                            this.displayComics();
+                        } catch (error) {
+                            console.error("Error getting comic books by price:", error);
+                        }
+                    }
                 });
             } else {
                 console.error("Sort by Price button not found.");
