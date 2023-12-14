@@ -1,0 +1,184 @@
+{
+  "series": [
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "z54321"
+          },
+          "title": {
+            "S": "Superman"
+          },
+          "volumeNumber": {
+            "S": "3"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "w98765"
+          },
+          "title": {
+            "S": "X-Men"
+          },
+          "volumeNumber": {
+            "S": "1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "q12345"
+          },
+          "title": {
+            "S": "Batman"
+          },
+          "volumeNumber": {
+            "S": "2"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "m67890"
+          },
+          "title": {
+            "S": "Spider-Man"
+          },
+          "volumeNumber": {
+            "S": "1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "u23456"
+          },
+          "title": {
+            "S": "Wonder Woman"
+          },
+          "volumeNumber": {
+            "S": "4"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "v34567"
+          },
+          "title": {
+            "S": "Avengers"
+          },
+          "volumeNumber": {
+            "S": "3"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "a45678"
+          },
+          "title": {
+            "S": "Hulk"
+          },
+          "volumeNumber": {
+            "S": "2"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "b56789"
+          },
+          "title": {
+            "S": "Iron Man"
+          },
+          "volumeNumber": {
+            "S": "1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "c67890"
+          },
+          "title": {
+            "S": "Thor"
+          },
+          "volumeNumber": {
+            "S": "5"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": {
+            "S": "jordan_2016@aol.com"
+          },
+          "seriesId": {
+            "S": "d78901"
+          },
+          "title": {
+            "S": "Green Lantern"
+          },
+          "volumeNumber": {
+            "S": "1"
+          }
+        }
+      }
+    }
+  ]
+}

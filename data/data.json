@@ -1,0 +1,154 @@
+{
+  "comicbooks": [
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "z54321" },
+          "title": { "S": "Superman" },
+          "isFavorite": { "BOOL": true },
+          "publisher": { "S": "DC Comics" },
+          "price": { "N": "180" },
+          "issueNumber": { "S": "30" },
+          "year" : {"S" : "1980"},
+          "volumeNumber": { "S": "3" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "w98765" },
+          "title": { "S": "X-Men" },
+          "isFavorite": { "BOOL": false },
+          "publisher": { "S": "Marvel" },
+          "price": { "N": "210" },
+          "issueNumber": { "S": "15" },
+          "year" : {"S" : "1995"},
+          "volumeNumber": { "S": "1" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "q12345" },
+          "title": { "S": "Batman" },
+          "isFavorite": { "BOOL": true },
+          "publisher": { "S": "DC Comics" },
+          "price": { "N": "250" },
+          "issueNumber": { "S": "25" },
+          "year" : {"S" : "1985"},
+          "volumeNumber": { "S": "2" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "m67890" },
+          "title": { "S": "Spider-Man" },
+          "isFavorite": { "BOOL": false },
+          "publisher": { "S": "Marvel" },
+          "price": { "N": "200" },
+          "issueNumber": { "S": "20" },
+          "year" : {"S" : "1990"},
+          "volumeNumber": { "S": "1" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "u23456" },
+          "title": { "S": "Wonder Woman" },
+          "isFavorite": { "BOOL": true },
+          "publisher": { "S": "DC Comics" },
+          "price": { "N": "220" },
+          "issueNumber": { "S": "18" },
+          "year" : {"S" : "1988"},
+          "volumeNumber": { "S": "4" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "v34567" },
+          "title": { "S": "Avengers" },
+          "isFavorite": { "BOOL": false },
+          "publisher": { "S": "Marvel" },
+          "price": { "N": "230" },
+          "issueNumber": { "S": "22" },
+          "year" : {"S" : "1992"},
+          "volumeNumber": { "S": "3" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "a45678" },
+          "title": { "S": "Hulk" },
+          "isFavorite": { "BOOL": true },
+          "publisher": { "S": "Marvel" },
+          "price": { "N": "270" },
+          "issueNumber": { "S": "10" },
+          "year" : {"S" : "1982"},
+          "volumeNumber": { "S": "2" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "b56789" },
+          "title": { "S": "Iron Man" },
+          "isFavorite": { "BOOL": false },
+          "publisher": { "S": "Marvel" },
+          "price": { "N": "240" },
+          "issueNumber": { "S": "17" },
+          "year" : {"S" : "1998"},
+          "volumeNumber": { "S": "1" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "c67890" },
+          "title": { "S": "Thor" },
+          "isFavorite": { "BOOL": true },
+          "publisher": { "S": "Marvel" },
+          "price": { "N": "260" },
+          "issueNumber": { "S": "12" },
+          "year" : {"S" : "1989"},
+          "volumeNumber": { "S": "5" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "customerId": { "S": "jordan_2016@aol.com" },
+          "seriesId": { "S": "d78901" },
+          "title": { "S": "Green Lantern" },
+          "isFavorite": { "BOOL": false },
+          "publisher": { "S": "DC Comics" },
+          "price": { "N": "190" },
+          "issueNumber": { "S": "28" },
+          "year" : {"S" : "1996"},
+          "volumeNumber": { "S": "1" }
+        }
+      }
+    }
+  ]
+}
