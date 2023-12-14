@@ -305,8 +305,6 @@ Resources:
           Properties:
             Path: /series
             Method: get
-            Auth:
-              Authorizer: 'NONE'
   CreateSeriesLambda:
     Type: AWS::Serverless::Function
     Properties:
