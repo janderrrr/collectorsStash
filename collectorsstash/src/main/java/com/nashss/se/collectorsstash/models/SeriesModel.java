@@ -32,6 +32,16 @@ public class SeriesModel {
     }
 
     @Override
+    public String toString() {
+        return "SeriesModel{" +
+                "customerId='" + customerId + '\'' +
+                ", seriesId='" + seriesId + '\'' +
+                ", title='" + title + '\'' +
+                ", volumeNumber='" + volumeNumber + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) { return true;}
         if (o == null || getClass() != o.getClass()) { return false;}

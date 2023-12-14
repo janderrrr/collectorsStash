@@ -17,18 +17,13 @@ public class ModelConverter {
                 .collect(Collectors.toList());
     }
 
-    public List<ComicBookModel> toSortedComicBookModelList(List<ComicBook> comicBooks) {
-        return comicBooks.stream()
-                .sorted(Comparator.comparing(ComicBook::getPrice))
-                .map(this::toComicModel)
-                .collect(Collectors.toList());
-    }
-        /**
-         * Converts a provided comic book into a ComicBookModel representation.
-         *
-         * @param comicBook the ComicBook to convert to ComicBookModel
-         * @return the converted ComicBookModel with fields mapped from ComicBook
-         */
+
+    /**
+     * Converts a provided comic book into a ComicBookModel representation.
+     *
+     * @param comicBook the ComicBook to convert to ComicBookModel
+     * @return the converted ComicBookModel with fields mapped from ComicBook
+     */
     public ComicBookModel toComicModel(ComicBook comicBook) {
         return ComicBookModel.builder()
                 .withSeriesId(comicBook.getSeriesId())
@@ -50,6 +45,10 @@ public class ModelConverter {
     }
 
     public SeriesModel toSeriesModel(Series series) {
+        if (series == null) {
+            return null;
+        }
+
         return SeriesModel.builder()
                 .withCustomerId(series.getCustomerId())
                 .withSeriesId(series.getSeriesId())

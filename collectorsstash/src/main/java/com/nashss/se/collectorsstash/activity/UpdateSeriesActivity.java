@@ -27,12 +27,19 @@ public class UpdateSeriesActivity {
     public UpdateSeriesResult handleRequest(final UpdateSeriesRequest updateSeriesRequest) {
         log.info("Received UpdateSeriesRequest {}", updateSeriesRequest);
 
-        Series series = seriesDao.getOneSeries(updateSeriesRequest.getCustomerId(),
-                updateSeriesRequest.getSeriesId());
+        Series series = seriesDao.getOneSeries(
+                updateSeriesRequest.getCustomerId(),
+                updateSeriesRequest.getSeriesId()
+        );
 
-        if(!series.getSeriesId().equals(updateSeriesRequest.getSeriesId())) {
+        if (series == null) {
+            throw new SeriesNotFoundException("Series not found for update");
+        }
+        if (!series.getSeriesId().equals(updateSeriesRequest.getSeriesId())) {
             throw new SeriesNotFoundException("Series must exist to update");
         }
+
+
         series.setTitle(updateSeriesRequest.getTitle());
         series.setVolumeNumber(updateSeriesRequest.getVolumeNumber());
 
