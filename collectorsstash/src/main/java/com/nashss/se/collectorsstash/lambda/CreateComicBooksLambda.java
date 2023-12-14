@@ -1,10 +1,11 @@
 package com.nashss.se.collectorsstash.lambda;
 
+import com.nashss.se.collectorsstash.activity.request.CreateComicBookRequest;
+import com.nashss.se.collectorsstash.activity.results.CreateComicBookResult;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.nashss.se.collectorsstash.activity.request.CreateComicBookRequest;
 
-import com.nashss.se.collectorsstash.activity.results.CreateComicBookResult;
 
 public class CreateComicBooksLambda
         extends LambdaActivityRunner<CreateComicBookRequest, CreateComicBookResult>
@@ -13,9 +14,9 @@ public class CreateComicBooksLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateComicBookRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    CreateComicBookRequest unauthenticatedRequest = input.fromBody(CreateComicBookRequest.class);
-                    return input.fromUserClaims(claims ->
+            () -> {
+                CreateComicBookRequest unauthenticatedRequest = input.fromBody(CreateComicBookRequest.class);
+                return input.fromUserClaims(claims ->
                             CreateComicBookRequest.builder()
                                     .withSeriesId(unauthenticatedRequest.getSeriesId())
                                     .withIssueNumber(unauthenticatedRequest.getIssueNumber())
@@ -27,8 +28,8 @@ public class CreateComicBooksLambda
                                     .withYear(unauthenticatedRequest.getYear())
                                     .withCustomerId(claims.get("email"))
                                     .build());
-                },
-                (request, serviceComponent) ->
+            },
+            (request, serviceComponent) ->
                         serviceComponent.provideCreateComicBookActivity().handleRequest(request)
 
         );

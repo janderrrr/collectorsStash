@@ -1,9 +1,16 @@
 package com.nashss.se.collectorsstash.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexRangeKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperFieldModel;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
 
 import java.util.Objects;
-
 
 /**
  * Represents a ComicBook in the DynamoDB table.
@@ -107,11 +114,19 @@ public class ComicBook {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)  {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ComicBook comicBook = (ComicBook) o;
-        return price == comicBook.price && isFavorite == comicBook.isFavorite && Objects.equals(seriesId, comicBook.seriesId) && Objects.equals(issueNumber, comicBook.issueNumber) &&
-                Objects.equals(title, comicBook.title) && Objects.equals(customerId, comicBook.customerId) && Objects.equals(volumeNumber, comicBook.volumeNumber) && Objects.equals(year, comicBook.year) && Objects.equals(publisher, comicBook.publisher);
+        return price == comicBook.price && isFavorite == comicBook.isFavorite &&
+                Objects.equals(seriesId, comicBook.seriesId) &&
+                Objects.equals(issueNumber, comicBook.issueNumber) &&
+                Objects.equals(title, comicBook.title) && Objects.equals(customerId, comicBook.customerId) &&
+                Objects.equals(volumeNumber, comicBook.volumeNumber) &&
+                Objects.equals(year, comicBook.year) && Objects.equals(publisher, comicBook.publisher);
     }
 
     @Override

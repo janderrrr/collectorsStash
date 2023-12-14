@@ -6,7 +6,11 @@ import java.util.List;
 
 public class GetSeriesResults {
     private final List<SeriesModel> seriesList;
-
+    /**
+     * Constructs a new result object for the retrieval of series.
+     *
+     * @param seriesList The list of {@link SeriesModel}s representing the retrieved series.
+     */
     public GetSeriesResults(List<SeriesModel> seriesList) {
         this.seriesList = seriesList;
     }

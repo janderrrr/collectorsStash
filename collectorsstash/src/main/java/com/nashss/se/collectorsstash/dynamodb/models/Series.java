@@ -72,10 +72,15 @@ public class Series {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)  {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Series series = (Series) o;
-        return Objects.equals(customerId, series.customerId) && Objects.equals(seriesId, series.seriesId) && Objects.equals(title, series.title) && Objects.equals(volumeNumber, series.volumeNumber);
+        return Objects.equals(customerId, series.customerId) && Objects.equals(seriesId, series.seriesId) &&
+                Objects.equals(title, series.title) && Objects.equals(volumeNumber, series.volumeNumber);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.nashss.se.collectorsstash.exceptions;
 
-public class SeriesNotFoundException extends RuntimeException{
+public class SeriesNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = -1353562416684063579L;
 

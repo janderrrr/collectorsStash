@@ -9,7 +9,14 @@ public class UpdateSeriesRequest {
     private final String seriesId;
     private final String title;
     private final String volumeNumber;
-
+    /**
+     * Constructs a new request object for updating information about a specific series.
+     *
+     * @param customerId   The ID of the customer associated with the series to be updated.
+     * @param seriesId     The ID of the series to be updated.
+     * @param title        The updated title for the series.
+     * @param volumeNumber The updated volume number for the series.
+     */
     public UpdateSeriesRequest(String customerId, String seriesId, String title, String volumeNumber) {
         this.customerId = customerId;
         this.seriesId = seriesId;

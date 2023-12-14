@@ -4,7 +4,12 @@ public class RemoveSeriesRequest {
     private final String customerId;
     private final String seriesId;
 
-
+    /**
+     * Constructs a new request object for removing a series associated with a specific customer.
+     *
+     * @param customerId The ID of the customer associated with the series to be removed.
+     * @param seriesId   The ID of the series to be removed.
+     */
     public RemoveSeriesRequest(String customerId, String seriesId) {
         this.customerId = customerId;
         this.seriesId = seriesId;

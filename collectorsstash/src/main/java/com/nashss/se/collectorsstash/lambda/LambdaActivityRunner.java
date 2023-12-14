@@ -2,7 +2,9 @@ package com.nashss.se.collectorsstash.lambda;
 
 import com.nashss.se.collectorsstash.dependency.DaggerServiceComponent;
 import com.nashss.se.collectorsstash.dependency.ServiceComponent;
+
 import org.apache.logging.log4j.LogManager;
+
 import org.apache.logging.log4j.Logger;
 
 import java.util.function.BiFunction;

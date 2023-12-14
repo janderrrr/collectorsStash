@@ -14,7 +14,19 @@ public class CreateComicBookRequest {
     private final int price;
     private final String publisher;
     private final String year;
-
+    /**
+     * Constructs a new request object for creating a comic book.
+     *
+     * @param customerId   The ID of the customer associated with the comic book.
+     * @param seriesId     The ID of the series to which the comic book belongs.
+     * @param title        The title of the comic book.
+     * @param issueNumber  The issue number of the comic book.
+     * @param volumeNumber The volume number of the comic book.
+     * @param isFavorite   The favorite status of the comic book.
+     * @param price        The price of the comic book.
+     * @param publisher    The publisher of the comic book.
+     * @param year         The publication year of the comic book.
+     */
     public CreateComicBookRequest(String customerId, String seriesId, String title, String issueNumber,
                                   String volumeNumber, Boolean isFavorite, int price, String publisher, String year) {
         this.customerId = customerId;

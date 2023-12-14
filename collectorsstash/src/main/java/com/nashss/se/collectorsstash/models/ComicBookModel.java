@@ -13,7 +13,19 @@ public class ComicBookModel {
     private final Boolean isFavorite;
     private final String publisher;
 
-
+    /**
+     * Constructs a new ComicBookModel with the specified parameters.
+     *
+     * @param seriesId      The unique identifier for the series associated with the comic book.
+     * @param customerId    The ID of the customer associated with the comic book.
+     * @param title         The title of the comic book.
+     * @param volumeNumber  The volume number of the comic book.
+     * @param issueNumber   The issue number of the comic book.
+     * @param year          The publication year of the comic book.
+     * @param price         The price of the comic book.
+     * @param isFavorite    Indicates whether the comic book is marked as a favorite.
+     * @param publisher     The publisher of the comic book.
+     */
     public ComicBookModel(String seriesId, String customerId, String title, String volumeNumber,
                           String issueNumber, String year, int price, Boolean isFavorite, String publisher) {
         this.seriesId = seriesId;
@@ -65,10 +77,15 @@ public class ComicBookModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ComicBookModel that = (ComicBookModel) o;
-        return price == that.price && Objects.equals(seriesId, that.seriesId) && Objects.equals(customerId, that.customerId) &&
+        return price == that.price && Objects.equals(seriesId, that.seriesId) &&
+                Objects.equals(customerId, that.customerId) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(volumeNumber, that.volumeNumber) && Objects.equals(issueNumber, that.issueNumber) &&
                 Objects.equals(year, that.year) && Objects.equals(isFavorite, that.isFavorite) &&
@@ -143,4 +160,5 @@ public class ComicBookModel {
             return new ComicBookModel(seriesId,customerId, title, volumeNumber, issueNumber, year, price, isFavorite, publisher);
         }
     }
+
 }

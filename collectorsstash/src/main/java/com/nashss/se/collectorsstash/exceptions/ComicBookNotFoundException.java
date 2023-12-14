@@ -1,6 +1,6 @@
 package com.nashss.se.collectorsstash.exceptions;
 
-public class ComicBookNotFoundException extends RuntimeException{
+public class ComicBookNotFoundException extends RuntimeException {
     private static final long serialVersionUID = -5311082217756617835L;
 
     /**

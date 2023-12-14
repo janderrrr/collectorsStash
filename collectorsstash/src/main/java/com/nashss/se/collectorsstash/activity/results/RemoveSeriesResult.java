@@ -4,7 +4,11 @@ import com.nashss.se.collectorsstash.models.SeriesModel;
 
 public class RemoveSeriesResult {
     private final SeriesModel seriesModel;
-
+    /**
+     * Constructs a new result object for the removal of a series.
+     *
+     * @param seriesModel The {@link SeriesModel} representing the removed series.
+     */
     public RemoveSeriesResult(SeriesModel seriesModel) {
         this.seriesModel = seriesModel;
     }

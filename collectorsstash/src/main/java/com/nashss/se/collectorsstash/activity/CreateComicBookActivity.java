@@ -16,11 +16,30 @@ public class CreateComicBookActivity {
     private final Logger log = LogManager.getLogger();
     private final ComicBookDao comicBookDao;
 
+    /**
+     * Instantiates a new CreateComicBookActivity object.
+     *
+     * @param comicBookDao ComicBookDao to access the comics table.
+     */
     @Inject
     public CreateComicBookActivity(ComicBookDao comicBookDao) {
         this.comicBookDao = comicBookDao;
     }
 
+
+    /**
+     * This method handles the incoming request by persisting a new Comic Book
+     * with the provided ComicBook customerId, seriesId, title, volumeNumber, issueNumber
+     * price, isFavorite, and publisher from the request.
+     * <p>
+     * It then returns the newly created ComicBook.
+     * <p>
+     *
+     * @param createComicBookRequest request object containing the customerId, seriesId, title, volumeNumber,
+     *                               issueNumber, Price,
+     *                               publisher, and isFavorite associated with it
+     * @return createComicBook result object containing the API defined {@link ComicBookModel}
+     */
     public CreateComicBookResult handleRequest(final CreateComicBookRequest createComicBookRequest) {
         log.info("Received CreateComicBookRequest {}", createComicBookRequest);
 

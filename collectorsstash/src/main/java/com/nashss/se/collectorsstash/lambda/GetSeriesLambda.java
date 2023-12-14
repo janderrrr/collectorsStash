@@ -1,9 +1,11 @@
 package com.nashss.se.collectorsstash.lambda;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.nashss.se.collectorsstash.activity.request.GetSeriesRequest;
 import com.nashss.se.collectorsstash.activity.results.GetSeriesResults;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+
 
 public class GetSeriesLambda
         extends LambdaActivityRunner<GetSeriesRequest, GetSeriesResults>
@@ -11,14 +13,12 @@ public class GetSeriesLambda
 
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetSeriesRequest> input, Context context) {
-        return super.runActivity(
-                () -> {
-                    return input.fromUserClaims(claims ->
+        return super.runActivity(() -> {
+            return input.fromUserClaims(claims ->
                             GetSeriesRequest.builder()
                                     .withCustomerId(claims.get("email"))
                                     .build());
-                },
-        (request, serviceComponent) ->
+        }, (request, serviceComponent) ->
                 serviceComponent.provideGetSeriesActivity().handleRequest(request)
         );
     }

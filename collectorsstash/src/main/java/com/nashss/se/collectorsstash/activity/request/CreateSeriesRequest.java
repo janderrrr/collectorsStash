@@ -8,7 +8,13 @@ public class CreateSeriesRequest {
     private final String customerId;
     private final String title;
     private final String volumeNumber;
-
+    /**
+     * Constructs a new request object for creating a series.
+     *
+     * @param customerId   The ID of the customer creating the series.
+     * @param title        The title of the series.
+     * @param volumeNumber The volume number of the series.
+     */
     public CreateSeriesRequest(String customerId, String title, String volumeNumber) {
         this.customerId = customerId;
         this.title = title;

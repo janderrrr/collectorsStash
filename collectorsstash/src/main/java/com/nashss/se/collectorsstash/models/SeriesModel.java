@@ -8,6 +8,14 @@ public class SeriesModel {
     private final String title;
     private final String volumeNumber;
 
+    /**
+     * Constructs a new SeriesModel with the specified parameters.
+     *
+     * @param customerId    The ID of the customer associated with the series.
+     * @param seriesId      The unique identifier for the series.
+     * @param title         The title of the series.
+     * @param volumeNumber  The volume number of the series.
+     */
     public SeriesModel(String customerId, String seriesId, String title, String volumeNumber) {
         this.customerId = customerId;
         this.seriesId = seriesId;
@@ -43,8 +51,12 @@ public class SeriesModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true;}
-        if (o == null || getClass() != o.getClass()) { return false;}
+        if (this == o)  {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SeriesModel that = (SeriesModel) o;
         return Objects.equals(customerId, that.customerId) && Objects.equals(seriesId, that.seriesId) &&
                 Objects.equals(title, that.title) && Objects.equals(volumeNumber, that.volumeNumber);

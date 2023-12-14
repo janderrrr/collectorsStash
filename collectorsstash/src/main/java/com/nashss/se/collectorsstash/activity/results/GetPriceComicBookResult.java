@@ -7,7 +7,7 @@ import java.util.List;
 public class GetPriceComicBookResult {
     private final List<ComicBookModel> comicList;
 
-    private GetPriceComicBookResult(List<ComicBookModel> comicList){
+    private GetPriceComicBookResult(List<ComicBookModel> comicList) {
         this.comicList = comicList;
     }
 
@@ -21,7 +21,12 @@ public class GetPriceComicBookResult {
                 "comicList=" + comicList +
                 '}';
     }
-
+    /**
+     * Creates a new builder instance for constructing a {@link
+     * com.nashss.se.collectorsstash.activity.request.GetPriceComicBookRequest}.
+     *
+     * @return A new instance of the {@link Builder} class to build a {@link GetPriceComicBookResult}.
+     */
     public static Builder builder() {
         return new Builder();
     }

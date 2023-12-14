@@ -2,13 +2,12 @@ package com.nashss.se.collectorsstash.activity.results;
 
 import com.nashss.se.collectorsstash.models.ComicBookModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetAllComicBooksResults {
     private final List<ComicBookModel> comicList;
 
-    private GetAllComicBooksResults(List<ComicBookModel> comicList){
+    private GetAllComicBooksResults(List<ComicBookModel> comicList) {
         this.comicList = comicList;
     }
 

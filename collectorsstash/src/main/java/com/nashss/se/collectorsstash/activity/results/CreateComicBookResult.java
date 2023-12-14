@@ -4,7 +4,11 @@ import com.nashss.se.collectorsstash.models.ComicBookModel;
 
 public class CreateComicBookResult {
     private final ComicBookModel comicBook;
-
+    /**
+     * Constructs a new result object for the creation of a comic book.
+     *
+     * @param comicBook The comic book model representing the newly created comic book.
+     */
     public CreateComicBookResult(ComicBookModel comicBook) {
         this.comicBook = comicBook;
     }
