@@ -3,6 +3,7 @@ package com.nashss.se.collectorsstash.dynamodb;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMappingException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.QueryResultPage;
 import com.nashss.se.collectorsstash.dynamodb.models.Series;
 import com.nashss.se.collectorsstash.exceptions.SeriesNotFoundException;
 import com.nashss.se.collectorsstash.metrics.MetricsConstants;
@@ -33,14 +34,15 @@ public class SeriesDao {
         DynamoDBQueryExpression<Series> queryExpression = new DynamoDBQueryExpression<Series>()
                 .withHashKeyValues(series);
 
-        List<Series> seriesList = mapper.query(Series.class, queryExpression);
+        QueryResultPage<Series> seriesList = mapper.queryPage(Series.class, queryExpression);
 
-         if(seriesList.isEmpty()) {
+
+         if(seriesList == null) {
             metricsPublisher.addCount(MetricsConstants.GETSERIES_FAIL_COUNT, 1);
             throw new SeriesNotFoundException("Series Not Found");
         }
         metricsPublisher.addCount(MetricsConstants.GETSERIES_SUCCESS_COUNT, 1);
-        return seriesList;
+        return seriesList.getResults();
     }
 
     public Series getOneSeries(String customerId, String seriesId) {
@@ -81,18 +83,18 @@ public class SeriesDao {
         return series;
     }
 
-    public boolean seriesExist(String customerId, String title, String volumeNumber) {
-        Series series = new Series();
-        series.setCustomerId(customerId);
-        series.setTitle(title);
-        series.setVolumeNumber(volumeNumber);
-
-        DynamoDBQueryExpression<Series> queryExpression = new DynamoDBQueryExpression<Series>()
-                .withHashKeyValues(series);
-
-        List<Series> seriesList = mapper.query(Series.class, queryExpression);
-        return !seriesList.isEmpty();
-    }
+//    public boolean seriesExist(String customerId, String title, String volumeNumber) {
+//        Series series = new Series();
+//        series.setCustomerId(customerId);
+//        series.setTitle(title);
+//        series.setVolumeNumber(volumeNumber);
+//
+//        DynamoDBQueryExpression<Series> queryExpression = new DynamoDBQueryExpression<Series>()
+//                .withHashKeyValues(series);
+//
+//        List<Series> seriesList = mapper.query(Series.class, queryExpression);
+//        return !seriesList.isEmpty();
+//    }
     //Creating a SeriesId random UUID, to be unique when creating each Series
     public String generateSeriesId(){
         return RandomStringUtils.randomAlphabetic(6);
