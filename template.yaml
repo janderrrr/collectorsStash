@@ -224,23 +224,32 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/events"
 
-        - PolicyName: 'AccessVendorsTable'
+        - PolicyName: 'AccessSeriesTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/Vendors"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/series"
+        - PolicyName: 'AccessComicBooksTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource:
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/comicbooks"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/comicbooks/index/PriceComicIndex"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
-  GetAllVendorsLambda:
+  GetAllComicBooksLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.GetAllVendorsLambda::handleRequest
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.GetAllComicBooksLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -252,17 +261,16 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /vendors
+            Path: /comicbooks/{seriesId}
             Method: get
             Auth:
               Authorizer: 'NONE'
-
-  GetVendorLambda:
+  GetPriceComicBookLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.GetVendorLambda::handleRequest
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.GetPriceComicBookLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -274,17 +282,16 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /vendors/{id}/{name}
+            Path: /comicbooks/{seriesId}/{price}
             Method: get
             Auth:
               Authorizer: 'NONE'
-              
-  CreateVendorLambda:
+  GetSeriesLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.CreateVendorLambda::handleRequest
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.GetSeriesLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -296,15 +303,33 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /vendor
+            Path: /series
+            Method: get
+  CreateSeriesLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.CreateSeriesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /series
             Method: post
-
-  GetOneEventLambda:
+  CreateComicBooksLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.GetOneEventLambda::handleRequest
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.CreateComicBooksLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -316,125 +341,14 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /event/{id}/{date}
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
-  ViewVendorsForEventLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.ViewVendorsForEventLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /event/{id}/{date}/vendors
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
-  GetPlaylistLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.GetPlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/{id}
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
-  SearchPlaylistsLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.SearchPlaylistsLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/search
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
-  GetPlaylistSongsLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.GetPlaylistSongsLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/{id}/songs
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
-  CreatePlaylistLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.CreatePlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists
+            Path: /comicbooks/{seriesId}
             Method: post
-
-  UpdatePlaylistLambda:
+  RemoveSeriesLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.UpdatePlaylistLambda::handleRequest
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.RemoveSeriesLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -446,93 +360,73 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /playlists/{id}
+            Path: /series/{seriesId}
+            Method: delete
+  UpdateSeriesLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: collectorsstash
+      Handler: com.nashss.se.collectorsstash.lambda.UpdateSeriesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /series/{seriesId}
             Method: put
-
-  AddSongToPlaylistLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.AddSongToPlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/{id}/songs
-            Method: post
-
-  GetAllEventsLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: VendorNearMeLambda
-      Handler: com.nashss.se.vendornearme.lambda.GetAllEventsLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /events
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
 
-  EventsTable:
+  ComicBooksTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "id"
+        - AttributeName: "seriesId"
           AttributeType: "S"
-        - AttributeName: "date"
+        - AttributeName: "issueNumber"
           AttributeType: "S"
+        - AttributeName: "price"
+          AttributeType: "N"
       KeySchema:
-        - AttributeName: "id"
+        - AttributeName: "seriesId"
           KeyType: "HASH"
-        - AttributeName: "date"
+        - AttributeName: "issueNumber"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "events"
-
-  VendorsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "id"
-          AttributeType: "S"
-        - AttributeName: "name"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "id"
-          KeyType: "HASH"
-        - AttributeName: "name"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "Vendors"
+      TableName: "comicbooks"
       GlobalSecondaryIndexes:
-        - IndexName: "VendorIdsIndex"
+        - IndexName: "PriceComicIndex"
           KeySchema:
-            - AttributeName: "id"
+            - AttributeName: "seriesId"
               KeyType: "HASH"
+            - AttributeName: "price"
+              KeyType: "RANGE"
           Projection:
             ProjectionType: "ALL"
+  SeriesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "customerId"
+          AttributeType: "S"
+        - AttributeName: "seriesId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "customerId"
+          KeyType: "HASH"
+        - AttributeName: "seriesId"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "series"
+
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
