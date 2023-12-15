@@ -33,7 +33,10 @@ public class RemoveSeriesActivityTest {
         String seriesId = "x12345";
 
         // Create a RemoveSeriesRequest object
-        RemoveSeriesRequest request = new RemoveSeriesRequest(customerId, seriesId);
+        RemoveSeriesRequest request = RemoveSeriesRequest.builder()
+                .withCustomerId(customerId)
+                .withSeriesId(seriesId)
+                .build();
 
         // Mock the behavior of seriesDao.removeSeries
         // In this case, assume that no exception is thrown during deletion, indicating success

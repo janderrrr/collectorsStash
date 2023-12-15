@@ -16,7 +16,7 @@ public class SeriesModel {
      * @param title         The title of the series.
      * @param volumeNumber  The volume number of the series.
      */
-    public SeriesModel(String customerId, String seriesId, String title, String volumeNumber) {
+    private SeriesModel(String customerId, String seriesId, String title, String volumeNumber) {
         this.customerId = customerId;
         this.seriesId = seriesId;
         this.title = title;

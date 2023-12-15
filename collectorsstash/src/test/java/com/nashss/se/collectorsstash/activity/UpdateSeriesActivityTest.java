@@ -38,7 +38,12 @@ public class UpdateSeriesActivityTest {
         String expectedVolumeNumber = "1";
 
         // Create an UpdateSeriesRequest object
-        UpdateSeriesRequest request = new UpdateSeriesRequest(customerId, seriesId, expectedTitle, expectedVolumeNumber);
+        UpdateSeriesRequest request = UpdateSeriesRequest.builder()
+                .withCustomerId(customerId)
+                .withSeriesId(seriesId)
+                .withTitle(expectedTitle)
+                .withVolumeNumber(expectedVolumeNumber)
+                .build();
 
         // Mock the behavior of seriesDao.getOneSeries to return null
         when(seriesDao.getOneSeries(customerId, seriesId)).thenReturn(null);
@@ -56,7 +61,12 @@ public class UpdateSeriesActivityTest {
         String expectedVolumeNumber = "1";
 
         // Create an UpdateSeriesRequest object
-        UpdateSeriesRequest request = new UpdateSeriesRequest(customerId, seriesId, expectedTitle, expectedVolumeNumber);
+        UpdateSeriesRequest request = UpdateSeriesRequest.builder()
+                .withCustomerId(customerId)
+                .withSeriesId(seriesId)
+                .withTitle(expectedTitle)
+                .withVolumeNumber(expectedVolumeNumber)
+                .build();
 
         // Old series, aka what we start with
         Series startingSeries = new Series();

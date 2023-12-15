@@ -26,7 +26,7 @@ public class ComicBookModel {
      * @param isFavorite    Indicates whether the comic book is marked as a favorite.
      * @param publisher     The publisher of the comic book.
      */
-    public ComicBookModel(String seriesId, String customerId, String title, String volumeNumber,
+    private ComicBookModel(String seriesId, String customerId, String title, String volumeNumber,
                           String issueNumber, String year, int price, Boolean isFavorite, String publisher) {
         this.seriesId = seriesId;
         this.customerId = customerId;
@@ -95,6 +95,21 @@ public class ComicBookModel {
     @Override
     public int hashCode() {
         return Objects.hash(seriesId, customerId, title, volumeNumber, issueNumber, year, price, isFavorite, publisher);
+    }
+
+    @Override
+    public String toString() {
+        return "ComicBookModel{" +
+                "seriesId='" + seriesId + '\'' +
+                ", customerId='" + customerId + '\'' +
+                ", title='" + title + '\'' +
+                ", volumeNumber='" + volumeNumber + '\'' +
+                ", issueNumber='" + issueNumber + '\'' +
+                ", year='" + year + '\'' +
+                ", price=" + price +
+                ", isFavorite=" + isFavorite +
+                ", publisher='" + publisher + '\'' +
+                '}';
     }
 
     //CHECKSTYLE:OFF:BUILDER

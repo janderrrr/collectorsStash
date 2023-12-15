@@ -9,7 +9,7 @@ public class GetPriceComicBookRequest {
      * @param seriesId The ID of the series for which comic books are being queried.
      * @param price    The maximum price to filter the comic books within the specified series.
      */
-    public GetPriceComicBookRequest(String seriesId, int price) {
+    private GetPriceComicBookRequest(String seriesId, int price) {
         this.seriesId = seriesId;
         this.price = price;
     }

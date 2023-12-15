@@ -27,7 +27,7 @@ public class CreateComicBookRequest {
      * @param publisher    The publisher of the comic book.
      * @param year         The publication year of the comic book.
      */
-    public CreateComicBookRequest(String customerId, String seriesId, String title, String issueNumber,
+    private CreateComicBookRequest(String customerId, String seriesId, String title, String issueNumber,
                                   String volumeNumber, Boolean isFavorite, int price, String publisher, String year) {
         this.customerId = customerId;
         this.seriesId = seriesId;

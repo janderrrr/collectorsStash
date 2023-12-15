@@ -17,7 +17,7 @@ public class UpdateSeriesRequest {
      * @param title        The updated title for the series.
      * @param volumeNumber The updated volume number for the series.
      */
-    public UpdateSeriesRequest(String customerId, String seriesId, String title, String volumeNumber) {
+    private UpdateSeriesRequest(String customerId, String seriesId, String title, String volumeNumber) {
         this.customerId = customerId;
         this.seriesId = seriesId;
         this.title = title;

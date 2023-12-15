@@ -31,8 +31,26 @@ public class CreateComicBookActivityTest {
 
     @Test
     void handleRequest_test_isSuccessful() {
-        CreateComicBookRequest request = new CreateComicBookRequest("jojo@gmail.com", "x12345", "ASM", "1"
-        , "2", true, 25000, "Marvel", "1964");
+        String customerId = "jojo@gmail.com";
+        String seriesId = "x12345";
+        String title = "ASM";
+        String issueNumber = "1";
+        String volumeNumber = "2";
+        Boolean isFavorite = true;
+        int price = 25000;
+        String publisher = "Marvel";
+        String year = "1964";
+        CreateComicBookRequest request = CreateComicBookRequest.builder()
+                .withCustomerId(customerId)
+                .withSeriesId(seriesId)
+                .withTitle(title)
+                .withIssueNumber(issueNumber)
+                .withVolumeNumber(volumeNumber)
+                .withIsFavorite(isFavorite)
+                .withPrice(price)
+                .withPublisher(publisher)
+                .withYear(year)
+                .build();
 
         ComicBook savedComicBook = new ComicBook();
         savedComicBook.setSeriesId(request.getSeriesId());

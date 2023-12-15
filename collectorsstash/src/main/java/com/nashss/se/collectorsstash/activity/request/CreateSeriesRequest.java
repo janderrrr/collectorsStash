@@ -15,7 +15,7 @@ public class CreateSeriesRequest {
      * @param title        The title of the series.
      * @param volumeNumber The volume number of the series.
      */
-    public CreateSeriesRequest(String customerId, String title, String volumeNumber) {
+    private CreateSeriesRequest(String customerId, String title, String volumeNumber) {
         this.customerId = customerId;
         this.title = title;
         this.volumeNumber = volumeNumber;
