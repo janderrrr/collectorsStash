@@ -126,32 +126,45 @@ class ViewSeries extends BindingClass {
         window.location.href = 'viewAllComicBooks.html?seriesId=' + encodeURIComponent(seriesId);
     }
 
-    async removeSeries(seriesId) {
-        // Display a confirmation prompt
-        const isConfirmed = confirm('Are you sure you want to remove this series?');
+async removeSeries(seriesId) {
+    // Get the series data for the specified seriesId
+    const seriesData = this.dataStore.get('series');
+    const seriesToRemove = seriesData.find(seriesItem => seriesItem.seriesId === seriesId);
 
-        if (!isConfirmed) {
-            return; // If not confirmed, do nothing
-        }
-
-        // Proceed with series removal
-        try {
-            console.log(`Removing series with ID: ${seriesId}`);
-            const result = await this.client.removeSeries(seriesId);
-
-            // Check if result is defined and has 'success' property
-            if (result && result.success) {
-                console.log("Series removed successfully");
-                await this.clientLoaded(); // Reload series after removal
-            } else {
-                // Check if result is defined and has 'error' property
-                const errorMessage = result && result.error ? result.error : "Unknown error";
-                console.error("Error while removing series:", errorMessage);
-            }
-        } catch (error) {
-            console.error("Error while removing series:", error);
-        }
+    if (!seriesToRemove) {
+        console.error(`Series with ID ${seriesId} not found.`);
+        return;
     }
+
+    // Display a confirmation prompt with information about the series to be removed
+    const isConfirmed = confirm(`Are you sure you want to remove the series '${seriesToRemove.title}'?`);
+
+    if (!isConfirmed) {
+        return; // If not confirmed, do nothing
+    }
+
+    // Proceed with series removal
+    try {
+        console.log(`Removing series with ID: ${seriesId}`);
+        const result = await this.client.removeSeries(seriesId);
+
+        // Check if result is defined and has 'success' property
+        if (result && result.success) {
+            console.log("Series removed successfully");
+
+            // Display a success message using an alert
+            alert(`The series '${seriesToRemove.title}' has been successfully removed.`);
+
+            await this.clientLoaded(); // Reload series after removal
+        } else {
+            // Check if result is defined and has 'error' property
+            const errorMessage = result && result.error ? result.error : "Unknown error";
+            console.error("Error while removing series:", errorMessage);
+        }
+    } catch (error) {
+        console.error("Error while removing series:", error);
+    }
+}
 
     mount() {
         this.header.addHeaderToPage();

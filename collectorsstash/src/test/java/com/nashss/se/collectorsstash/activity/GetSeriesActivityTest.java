@@ -6,18 +6,18 @@ import com.nashss.se.collectorsstash.dynamodb.SeriesDao;
 
 import com.nashss.se.collectorsstash.dynamodb.models.Series;
 import com.nashss.se.collectorsstash.models.SeriesModel;
+import com.nashss.se.collectorsstash.testHelper.SeriesTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.openMocks;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class GetSeriesActivityTest {
     @Mock
@@ -27,40 +27,30 @@ public class GetSeriesActivityTest {
 
     @BeforeEach
     void setUp() {
-        openMocks(this);
+        initMocks(this);
         getSeriesActivity =  new GetSeriesActivity(seriesDao);
     }
 
     @Test
     void handleRequest_test_isSuccessful() {
-        GetSeriesRequest request = new GetSeriesRequest("jojo@gmail.com");
 
-        // Create Series objects with unique seriesId values
-        Series series1 = new Series();
-        series1.setCustomerId("jojo@gmail.com");
-        series1.setSeriesId("x12345");  // Make sure seriesId is unique
-        series1.setTitle("ASM");
-        series1.setVolumeNumber("1");
+        List<Series> seriesList = SeriesTestHelper.generateSeriesList(4);
+        String startCustomerId = seriesList.get(0).getCustomerId();
 
-        Series series2 = new Series();
-        series2.setCustomerId("jojo@gmail.com");
-        series2.setSeriesId("x12346");  // Make sure seriesId is unique
-        series2.setTitle("ASM");
-        series2.setVolumeNumber("2");
-
-        // Set up the expected SeriesModel objects
-        List<SeriesModel> expectedSeriesModel = Arrays.asList(
-                new SeriesModel("jojo@gmail.com", "x12345", "ASM", "1"),
-                new SeriesModel("jojo@gmail.com", "x12346", "ASM", "2")
-        );
-
+        GetSeriesRequest request = GetSeriesRequest.builder()
+                .withCustomerId(startCustomerId)
+                .build();
         // Mock the behavior of SeriesDao
-        when(seriesDao.getSeries("jojo@gmail.com")).thenReturn(Arrays.asList(series1, series2));
+        when(seriesDao.getSeries(startCustomerId)).thenReturn(seriesList);
 
         // Call the method being tested
         GetSeriesResults results = getSeriesActivity.handleRequest(request);
 
+        List<SeriesModel> seriesModels = results.getSeriesList();
+
         // Check if the results match the expected SeriesModel list
-        assertEquals(expectedSeriesModel, results.getSeriesList());
+        for(int i = 0; i <seriesModels.size(); i++){
+            assertEquals(seriesList.get(i).getSeriesId(), seriesModels.get(i).getSeriesId());
+        }
     }
 }

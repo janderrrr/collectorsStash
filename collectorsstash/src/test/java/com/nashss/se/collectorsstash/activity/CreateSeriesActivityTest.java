@@ -29,7 +29,14 @@ public class CreateSeriesActivityTest {
 
     @Test
     void handleRequest_test_isSuccessful() {
-        CreateSeriesRequest request = new CreateSeriesRequest("jojo@gmail.com", "ASM", "1");
+        String customerId = "jojo@gmail.com";
+        String title = "ASM";
+        String volumeNumber = "1";
+        CreateSeriesRequest request = CreateSeriesRequest.builder()
+                .withCustomerId(customerId)
+                .withTitle(title)
+                .withVolumeNumber(volumeNumber)
+                .build();
 
         Series savedSeries = new Series();
         savedSeries.setCustomerId(request.getCustomerId());

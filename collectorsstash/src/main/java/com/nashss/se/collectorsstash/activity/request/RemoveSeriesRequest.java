@@ -10,7 +10,7 @@ public class RemoveSeriesRequest {
      * @param customerId The ID of the customer associated with the series to be removed.
      * @param seriesId   The ID of the series to be removed.
      */
-    public RemoveSeriesRequest(String customerId, String seriesId) {
+    private RemoveSeriesRequest(String customerId, String seriesId) {
         this.customerId = customerId;
         this.seriesId = seriesId;
     }

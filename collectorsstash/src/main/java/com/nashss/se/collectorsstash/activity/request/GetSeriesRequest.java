@@ -7,7 +7,7 @@ public class GetSeriesRequest {
      *
      * @param customerId The ID of the customer for whom series information is being requested.
      */
-    public GetSeriesRequest(String customerId) {
+    private GetSeriesRequest(String customerId) {
         this.customerId = customerId;
     }
 
