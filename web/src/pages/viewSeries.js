@@ -43,19 +43,23 @@ class ViewSeries extends BindingClass {
             return;
         }
 
-        const seriesContainer = document.getElementById('series');
 
-        seriesContainer.innerHTML = '';
+    // Sort seriesData alphabetically by title
+    seriesData.sort((a, b) => a.title.localeCompare(b.title));
+
+    const seriesContainer = document.getElementById('series');
+
+    seriesContainer.innerHTML = '';
 
         seriesData.forEach((seriesItem) => {
             const seriesElement = document.createElement('div');
             seriesElement.className = 'series-item';
 
             const titleParagraph = document.createElement('p');
-            titleParagraph.innerHTML = `<strong>Series Title:</strong> <strong>${seriesItem.title || 'N/A'}</strong>`;
+            titleParagraph.innerHTML = `<strong>Series:</strong> <strong>${seriesItem.title || 'N/A'}</strong>`;
 
             const volumeNumberParagraph = document.createElement('p');
-            volumeNumberParagraph.innerHTML = `<strong>Volume Number:</strong> <strong>${seriesItem.volumeNumber || 'N/A'}</strong>`;
+            volumeNumberParagraph.innerHTML = `<strong>Volume:</strong> <strong>${seriesItem.volumeNumber || 'N/A'}</strong>`;
 
             const removeButton = document.createElement('button');
             removeButton.innerText = 'Remove';
@@ -126,45 +130,45 @@ class ViewSeries extends BindingClass {
         window.location.href = 'viewAllComicBooks.html?seriesId=' + encodeURIComponent(seriesId);
     }
 
-async removeSeries(seriesId) {
+    async removeSeries(seriesId) {
     // Get the series data for the specified seriesId
-    const seriesData = this.dataStore.get('series');
-    const seriesToRemove = seriesData.find(seriesItem => seriesItem.seriesId === seriesId);
+        const seriesData = this.dataStore.get('series');
+        const seriesToRemove = seriesData.find(seriesItem => seriesItem.seriesId === seriesId);
 
-    if (!seriesToRemove) {
-        console.error(`Series with ID ${seriesId} not found.`);
-        return;
-    }
+        if (!seriesToRemove) {
+            console.error(`Series with ID ${seriesId} not found.`);
+            return;
+        }
 
     // Display a confirmation prompt with information about the series to be removed
-    const isConfirmed = confirm(`Are you sure you want to remove the series '${seriesToRemove.title}'?`);
+        const isConfirmed = confirm(`Are you sure you want to remove the series '${seriesToRemove.title}'?`);
 
-    if (!isConfirmed) {
+        if (!isConfirmed) {
         return; // If not confirmed, do nothing
-    }
+        }
 
     // Proceed with series removal
-    try {
-        console.log(`Removing series with ID: ${seriesId}`);
-        const result = await this.client.removeSeries(seriesId);
+        try {
+            console.log(`Removing series with ID: ${seriesId}`);
+            const result = await this.client.removeSeries(seriesId);
 
         // Check if result is defined and has 'success' property
-        if (result && result.success) {
-            console.log("Series removed successfully");
+            if (result && result.success) {
+                console.log("Series removed successfully");
 
             // Display a success message using an alert
-            alert(`The series '${seriesToRemove.title}' has been successfully removed.`);
+                alert(`The series '${seriesToRemove.title}' has been successfully removed.`);
 
             await this.clientLoaded(); // Reload series after removal
-        } else {
+            } else {
             // Check if result is defined and has 'error' property
-            const errorMessage = result && result.error ? result.error : "Unknown error";
-            console.error("Error while removing series:", errorMessage);
+                const errorMessage = result && result.error ? result.error : "Unknown error";
+                console.error("Error while removing series:", errorMessage);
+            }
+        } catch (error) {
+            console.error("Error while removing series:", error);
         }
-    } catch (error) {
-        console.error("Error while removing series:", error);
     }
-}
 
     mount() {
         this.header.addHeaderToPage();

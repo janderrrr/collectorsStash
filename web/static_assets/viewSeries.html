@@ -5,7 +5,22 @@
     <script type="text/javascript" src="assets/viewSeries.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="icon" type="image/png" href="images/icons8-wolverine-48.png">
+    <style>
+        /* Center the "Series" title */
+        .card {
+            width: 100%;
+            text-align: center;
+        }
 
+        /* Add a new style for the series-item to make it half the size */
+        .series-item {
+            width: 48%; /* Set the width to 48% to make two items fit side by side */
+            margin: 1%; /* Add a small margin between the items */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+            display: inline-block; /* Display the series items inline */
+            vertical-align: top; /* Align the items at the top */
+        }
+    </style>
 </head>
 
 <body class="background">
@@ -15,21 +30,34 @@
     <h1>Series</h1>
 </div>
 
-<div id="series">
-    <div class="series-item" data-series-id="AaRGcw">
-        <h2>Loading Series!</h2>
-        <button class="remove-button">Remove</button>
-        <button class="update-button">Update</button>
-        <button class="view-comic-books-button">View All Comic Books</button>
-    </div>
-</div>
-
 <div id="page-buttons">
-    <button id="previous-page">Previous Series</button>
-    <button id="next-page">Next Series</button>
     <a href="createSeries.html" class="button">Create Series</a>
 </div>
 
+<div id="series">
+    <div class="series-item" data-series-id="AaRGcw">
+        <div class="series-details">
+            <h2>Loading Series!</h2>
+        </div>
+        <div class="button-container">
+            <button class="remove-button">Remove</button>
+            <button class="update-button">Update</button>
+            <button class="view-comic-books-button">View All Comic Books</button>
+        </div>
+    </div>
+
+    <!-- Duplicate the series-item for the second card -->
+    <div class="series-item" data-series-id="AaRGcw">
+        <div class="series-details">
+            <h2>Loading Series!</h2>
+        </div>
+        <div class="button-container">
+            <button class="remove-button">Remove</button>
+            <button class="update-button">Update</button>
+            <button class="view-comic-books-button">View All Comic Books</button>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

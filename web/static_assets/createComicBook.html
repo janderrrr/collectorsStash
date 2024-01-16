@@ -18,17 +18,15 @@
         <p class="hidden error" id="error-message"> </p>
         <p class="form-field">
             <label>Title</label>
-            <input type="text" required id="comic-title" placeholder="Enter comic title">
+            <input type="text" readonly required id="comic-title" placeholder="Enter comic title">
         </p>
         <p class="form-field">
             <label>Issue Number</label>
-            <input type="number" required class="validated-field" id="issue-number"
-                   placeholder="Enter issue number" autofocus>
+            <input type="number" required class="validated-field" id="issue-number" placeholder="Enter issue number" autofocus>
         </p>
         <p class="form-field">
             <label>Volume Number</label>
-            <input type="number" id="volume-number" class="volume-number" placeholder="Enter volume number"
-                   required>
+            <input type="number" readonly id="volume-number" class="volume-number" placeholder="Enter volume number" required>
         </p>
         <p class="form-field">
             <label>Year</label>
@@ -40,7 +38,7 @@
         </p>
         <p class="form-field">
             <label>Price</label>
-            <input type="number" step="0.01" required id="comic-price" placeholder="Enter comic price">
+            <input type="number" step="0.01" required id="comic-price" placeholder="Enter the price you paid!">
         </p>
         <p class="form-field">
             <label>Is Favorite</label>

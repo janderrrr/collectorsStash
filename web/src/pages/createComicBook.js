@@ -6,21 +6,56 @@ import DataStore from '../util/DataStore';
 class CreateComicBook extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submit', 'redirectToViewComics'], this);
+        this.bindClassMethods(['mount', 'submit', 'fetchSeriesDetails'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this._seriesId = null; // Private property to store seriesId
     }
 
-    mount() {
+    async mount() {
         console.log("Mounting CreateComicBook...");
-        document.getElementById('create').addEventListener('click', this.submit);
         this.header.addHeaderToPage();
         this.client = new CollectorStashClient();
 
         // Retrieve the seriesId from the URL
         const urlParams = new URLSearchParams(window.location.search);
         this._seriesId = urlParams.get('seriesId');
+
+        // Fetch series details and set default values for Title and Volume Number
+        await this.fetchSeriesDetails();
+
+        // Add click event listener to the 'Create' button
+        document.getElementById('create').addEventListener('click', this.submit);
+    }
+
+    async fetchSeriesDetails() {
+        try {
+            if (this._seriesId) {
+                // Fetch series details based on the seriesId
+                const result = await this.client.getSeries(this._seriesId);
+                console.log("Series details result:", result);
+
+                // Check if the result has series details
+                if (result && result.series && result.series.length > 0) {
+                    const series = result.series.find(s => s.seriesId === this._seriesId);
+
+                    // Check if the series with the desired seriesId is found
+                    if (series) {
+                        // Set the default values for Title and Volume Number
+                        document.getElementById('comic-title').value = series.title || '';
+                        document.getElementById('volume-number').value = series.volumeNumber || '';
+                    } else {
+                        console.error("Series with the specified seriesId not found:", result);
+                    }
+                } else {
+                    console.error("Series details not found or empty:", result);
+                }
+            } else {
+                console.error("Series ID is missing in the URL.");
+            }
+        } catch (error) {
+            console.error("Error fetching series details:", error);
+        }
     }
 
     async submit(event) {
@@ -36,6 +71,7 @@ class CreateComicBook extends BindingClass {
             const origButtonText = createButton.innerText;
             createButton.innerText = 'Updating...';
 
+            // Retrieve form field values
             const title = document.getElementById('comic-title').value;
             const volumeNumber = document.getElementById('volume-number').value;
             const issueNumber = document.getElementById('issue-number').value;
@@ -46,34 +82,26 @@ class CreateComicBook extends BindingClass {
 
             console.log("Form values:", { title, volumeNumber, issueNumber, year, publisher, price, isFavorite });
 
-            if (title.trim() === '') {
-                createButton.innerText = origButtonText;
-                errorMessageDisplay.innerText = 'Please enter a comic title.';
-                errorMessageDisplay.classList.remove('hidden');
-                return;
-            }
+            // Validate form fields if needed
 
-            if (isNaN(volumeNumber) || volumeNumber <= 0) {
-                createButton.innerText = origButtonText;
-                errorMessageDisplay.innerText = 'Please enter a valid volume number.';
-                errorMessageDisplay.classList.remove('hidden');
-                return;
-            }
+            // Call the AWS SDK or client method to create a new comic book
+            // Replace the following line with your actual AWS SDK or client code
+            // const createdComicBooks = await yourAWSClient.createComicBook(/* parameters */);
 
-            // Call the CollectorStashClient to create a new comic book
-            const createdComicBooks = await this.client.createComicBook(
-                this._seriesId, // Include the seriesId in the request
-                title,
-                volumeNumber,
-                issueNumber,
-                year,
-                publisher,
-                price,
-                isFavorite,
-            );
+            // Example:
+             const createdComicBooks = await this.client.createComicBook(
+                 this._seriesId,
+                 title,
+                 volumeNumber,
+                 issueNumber,
+                 year,
+                 publisher,
+                 price,
+                 isFavorite
+             );
 
-            this.dataStore.set('comicbook', createdComicBooks);
-            console.log("Created Comic Books:", createdComicBooks);
+            // Handle the response if needed
+             this.dataStore.set('comicbook', createdComicBooks);
 
             // Redirect to the view comics page after successful creation
             this.redirectToViewComics();
@@ -83,10 +111,10 @@ class CreateComicBook extends BindingClass {
         }
     }
 
-redirectToViewComics() {
-    console.log("Redirecting to viewAllComicBooks.html...");
-    window.location.href = `/viewAllComicBooks.html?seriesId=${this._seriesId}`;
-}
+    redirectToViewComics() {
+        console.log("Redirecting to viewAllComicBooks.html...");
+        window.location.href = `/viewAllComicBooks.html?seriesId=${this._seriesId}`;
+    }
 }
 
 const main = () => {
