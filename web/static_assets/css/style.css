@@ -252,13 +252,54 @@ header {
 }
 
 body {
-    background-image: url("/images/XyLtNUL.jpg");
+    background-image: url("/images/blue.jpg");
 }
 
 #pagination-controls {
     display: flex;
     justify-content: center;
     padding: 15px 0;
+}
+
+body {
+    background-color: #000; /* Set the background color of the body to black */
+    color: #fff; /* Set the text color to white */
+}
+
+.card, .series-item {
+    background-color: #000; /* Set the background color of the boxes to black */
+    color: #fff; /* Set the text color inside the boxes to white */
+}
+.card, .comic-book {
+    background-color: #000; /* Set the background color of the boxes to black */
+    color: #fff; /* Set the text color inside the boxes to white */
+}
+
+.button {
+    background-color: #333; /* Set the background color of the buttons to a darker shade */
+    color: #fff; /* Set the text color of the buttons to white */
+}
+
+/* If you want a different style for links, you can add the following */
+a {
+    color: #00f; /* Set the color of links to blue (#00f) or any other color you prefer */
+    text-decoration: none; /* Remove the default underline from links */
+}
+
+a:hover {
+    text-decoration: underline; /* Add underline on hover for links */
+}
+#page-buttons .button {
+    background-color: #000; /* Set the background color of the button to black */
+    color: #fff; /* Set the text color of the button to white */
+    padding: 15px 30px; /* Adjust the padding to make the button bigger */
+    font-size: 18px; /* Adjust the font size */
+    border-radius: 8px; /* Add border-radius for rounded corners */
+    text-decoration: none;
+}
+
+#page-buttons .button:hover {
+    background-color: #333; /* Darken the background color on hover */
 }
 
 #vendors-loading {
@@ -275,15 +316,9 @@ body {
 #prevButton:hover {
     background-color: #E57300;
 }
-  
+
 #nextButton:hover {
     background-color: #E57300;
-}
-
-.vendor {
-    flex: 0 0 calc(25% - 1rem);
-    box-sizing: border-box;
-    margin-bottom: 1rem;
 }
 
 
@@ -309,27 +344,8 @@ body {
     flex-direction: column;
 }
 
-.tags {
-    display: flex;
-    flex-direction: row;
-}
 
-.tag {
-    font-size: 12px;
-    margin: 0 10px;
-    padding: 4px 8px;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    position: relative;
-    border-radius: 16px;
-}
-
-.tagList {
-    list-style-type: disc;
-    padding: 1em;
-}
-
-/* table styles */ 
+/* table styles */
 
 th, td {
     padding: 15px;
